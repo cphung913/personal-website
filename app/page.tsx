@@ -22,10 +22,10 @@ interface Post {
 
 const FOCUS = {
   label: "Current Technical Focus",
-  title: "Transformer Inference Compression Benchmark",
+  title: "ML Efficiency Research",
   description:
-    "Empirical benchmark comparing the effect of operation ordering — quantization vs. pruning vs. distillation — on transformer inference throughput and accuracy degradation across model scales.",
-  status: "ML Research",
+    "Surveying ML efficiency literature with a PhD student mentor through UCI's UROP Discovery Program. Identifying open research problems and developing a project for lab outreach.",
+  status: "In Progress",
 };
 
 const POSTS: Post[] = [
@@ -42,10 +42,10 @@ const POSTS: Post[] = [
 const PROJECTS: Project[] = [
   {
     status: "Complete",
-    stack: ["Next.js", "PostgreSQL", "Python", "GIS"],
+    stack: ["React", "Next.js", "FastAPI", "Python", "SQLite", "Tesseract OCR"],
     title: "Property Risk Intelligence",
     description:
-      "Aggregates parcel-level risk data — flood zones, fire hazard ratings, permit history — and surfaces actionable scores for real estate investors.",
+      "AI-powered document ingestion pipeline that extracts, classifies, and cross-checks property tax, title, and financial documents to flag collateral inconsistencies and generate structured risk findings for underwriter review. Built in 36 hours, validated with First American employees and industry underwriters.",
     href: "/projects/property-risk-intelligence",
   },
 ];
@@ -122,9 +122,9 @@ function RecentWriting() {
         </h2>
         <Link
           href="/blog"
-          className="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-[#888880] no-underline"
+          className="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-[#888880] no-underline hover:text-[#1A6B4A]"
         >
-          View Posts
+          View All
         </Link>
       </div>
 
@@ -148,7 +148,7 @@ function RecentWriting() {
             </p>
             <Link
               href={post.href}
-              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A6B4A] no-underline"
+              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A6B4A] no-underline hover:scale-105 transition-transform duration-150"
             >
               Read Essay <ArrowIcon />
             </Link>
@@ -164,9 +164,17 @@ function RecentWriting() {
 function FeaturedProjects() {
   return (
     <section className="mb-20">
-      <h2 className="mb-7 font-serif text-[26px] text-[#2C3E50]">
-        Featured Projects
-      </h2>
+      <div className="mb-7 flex items-baseline justify-between">
+        <h2 className="font-serif text-[26px] text-[#2C3E50]">
+          Featured Projects
+        </h2>
+        <Link
+          href="/projects"
+          className="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-[#888880] no-underline hover:text-[#1A6B4A]"
+        >
+          View All
+        </Link>
+      </div>
 
       {PROJECTS.map((project) => (
         <div key={project.title} className="grid grid-cols-[120px_1fr] gap-x-6 border-b border-[rgba(13,13,13,0.08)] pb-7">
@@ -192,7 +200,7 @@ function FeaturedProjects() {
             </p>
             <Link
               href={project.href}
-              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A6B4A] no-underline"
+              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A6B4A] no-underline hover:scale-105 transition-transform duration-150"
             >
               View Project <ArrowIcon />
             </Link>
@@ -219,9 +227,7 @@ export default function HomePage() {
         </h1>
 
         <p className="mb-6 max-w-[480px] font-sans text-base leading-[1.7] text-[#0D0D0D]">
-          Building at the intersection of scalable systems and modern web
-          infrastructure. Currently exploring distributed backends and
-          high-performance developer tooling as a first-year student.
+          Freshman at UC Irvine studying Computer Science. Aspriring software engineer with a focus on impact driven full-stack development and machine learning research.
         </p>
 
         {/* Social links */}
@@ -229,7 +235,7 @@ export default function HomePage() {
           {[
             {
               icon: <GitHubIcon />,
-              href: "https://github.com/chasephung",
+              href: "https://github.com/cphung913",
               label: "GitHub",
             },
             {
@@ -239,7 +245,7 @@ export default function HomePage() {
             },
             {
               icon: <MailIcon />,
-              href: "mailto:chase@chasephung.dev",
+              href: "mailto:chasephung13@gmail.com",
               label: "Email",
             },
           ].map((s) => (
@@ -256,8 +262,8 @@ export default function HomePage() {
       </section>
 
       <FocusCard />
-      <RecentWriting />
       <FeaturedProjects />
+      <RecentWriting />
     </>
   );
 }

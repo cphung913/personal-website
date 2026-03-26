@@ -23,7 +23,7 @@ export default function Header() {
           <Link
             key={l.label}
             href={l.href}
-            className={`font-sans text-[13px] transition-colors duration-150 hover:text-[#1A6B4A] ${
+            className={`font-sans text-[13px] transition-colors transition-transform duration-150 hover:text-[#1A6B4A] hover:scale-105 ${
               l.active
                 ? "text-[#1A6B4A] underline underline-offset-[3px] decoration-2 font-bold"
                 : "text-[#888880] no-underline"
