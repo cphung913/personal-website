@@ -24,7 +24,7 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "chasephung.dev",
   description:
-    "Homepage of Chase Phung, a UCI computer science student and aspiring software engineer.",
+    "Personal website of Chase Phung, a UCI computer science student and aspiring software engineer.",
 };
 
 export default function RootLayout({
