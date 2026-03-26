@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState, type CSSProperties } from "react";
 import Link from "next/link";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -61,16 +64,18 @@ function ArrowIcon() {
 function ProjectCard({
   project,
   showDivider,
+  style,
 }: {
   project: Project;
   showDivider: boolean;
+  style?: CSSProperties;
 }) {
   return (
     <>
       {showDivider && (
         <hr className="border-t border-[rgba(13,13,13,0.08)] mb-0" />
       )}
-      <div className="grid grid-cols-[180px_1fr] gap-x-6 py-16">
+      <div className="grid grid-cols-[180px_1fr] gap-x-6 py-16" style={style}>
         {/* Left column */}
         <div className="pt-1">
           <p
@@ -145,6 +150,19 @@ function ProjectCard({
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ProjectsPage() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setIsVisible(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  const fadeStyle = (delay: number) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? "translateY(0)" : "translateY(20px)",
+    transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
+  });
+
   return (
     <main
       className="min-h-screen"
@@ -153,7 +171,7 @@ export default function ProjectsPage() {
       <div className="max-w-[720px] mx-auto px-10 pt-4 pb-24">
 
         {/* Page header */}
-        <div className="mb-1">
+        <div className="mb-1" style={fadeStyle(0)}>
           <h1
             className="text-[64px] leading-[1.05] mb-3"
             style={{
@@ -178,6 +196,7 @@ export default function ProjectsPage() {
               key={project.title}
               project={project}
               showDivider={i > 0}
+              style={fadeStyle(120 + i * 80)}
             />
           ))}
         </div>

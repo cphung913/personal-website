@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -233,10 +236,23 @@ function FeaturedProjects() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setIsVisible(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  const fadeStyle = (delay: number) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? "translateY(0)" : "translateY(20px)",
+    transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
+  });
+
   return (
     <>
       {/* Hero */}
-      <section className="mb-12">
+      <section className="mb-12" style={fadeStyle(0)}>
         <p className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-[#888880]">
           CS Freshman · UC Irvine
         </p>
@@ -280,9 +296,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <FocusCard />
-      <FeaturedProjects />
-      <RecentWriting />
+      <div style={fadeStyle(80)}>
+        <FocusCard />
+      </div>
+      <div style={fadeStyle(160)}>
+        <FeaturedProjects />
+      </div>
+      {/* <RecentWriting /> */}
     </>
   );
 }
