@@ -118,7 +118,7 @@ export default function AboutPage() {
         {!pdfError ? (
           <div className="border border-[#E0DDD6] bg-white overflow-hidden">
             <iframe
-              src="/resume.pdf"
+              src="/resume.pdf#page=1&zoom=page-width&pagemode=none&navpanes=0&toolbar=0&scrollbar=0"
               className="w-full"
               style={{ height: "680px" }}
               title="Chase Phung Resume"
