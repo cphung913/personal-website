@@ -127,8 +127,8 @@ function FocusCard() {
 function RecentWriting() {
   return (
     <section className="mb-14">
-      <div className="mb-7 flex items-baseline justify-between border-b border-[rgba(13,13,13,0.08)] pb-7">
-        <h2 className="font-serif text-[26px] text-[#2C3E50]">
+      <div className="mb-7 flex items-baseline justify-between border-b border-[rgba(13,13,13,0.08)] pb-5 sm:pb-7">
+        <h2 className="font-serif text-[22px] text-[#2C3E50] sm:text-[26px]">
           Recent Writing
         </h2>
         <Link
@@ -140,7 +140,7 @@ function RecentWriting() {
       </div>
 
       {POSTS.map((post) => (
-        <div key={post.title} className="grid grid-cols-[120px_1fr] gap-x-6 pb-7">
+        <div key={post.title} className="grid grid-cols-1 gap-y-3 pb-7 sm:grid-cols-[120px_1fr] sm:gap-x-6 sm:gap-y-0">
           <div>
             <p className="mb-0.5 font-sans text-[11px] uppercase tracking-[0.08em] text-[#888880]">
               {post.date}
@@ -175,8 +175,8 @@ function RecentWriting() {
 function FeaturedProjects() {
   return (
     <section className="mb-20">
-      <div className="mb-7 flex items-baseline justify-between border-b border-[rgba(13,13,13,0.08)] pb-7">
-        <h2 className="font-serif text-[26px] text-[#2C3E50]">
+      <div className="mb-7 flex items-baseline justify-between border-b border-[rgba(13,13,13,0.08)] pb-5 sm:pb-7">
+        <h2 className="font-serif text-[22px] text-[#2C3E50] sm:text-[26px]">
           Featured Projects
         </h2>
         <Link
@@ -188,7 +188,7 @@ function FeaturedProjects() {
       </div>
 
       {PROJECTS.map((project) => (
-        <div key={project.title} className="grid grid-cols-[180px_1fr] gap-x-6 pb-7">
+        <div key={project.title} className="grid grid-cols-1 gap-y-3 pb-7 sm:grid-cols-[180px_1fr] sm:gap-x-6 sm:gap-y-0">
           <div className="pt-1">
             <p className="mb-1 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-[#888880]">
               {project.date}
@@ -257,7 +257,7 @@ export default function HomePage() {
           CS Freshman · UC Irvine
         </p>
 
-        <h1 className="mb-5 font-serif text-[clamp(48px,6vw,64px)] leading-[1.05] text-[#2C3E50]">
+        <h1 className="mb-5 font-serif text-[clamp(38px,10vw,64px)] leading-[1.05] text-[#2C3E50]">
           Chase Phung
         </h1>
 

@@ -42,14 +42,14 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-[#F7F5F0] text-[#0D0D0D]">
       {/* ── Hero ── */}
-      <section className="max-w-3xl mx-auto px-6 pt-20 pb-16">
+      <section className="mx-auto max-w-3xl px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-20">
         <div className="flex flex-col-reverse md:flex-row md:items-start md:gap-12">
           {/* Text */}
           <div className="flex-1 mt-8 md:mt-0">
             <h1
               ref={(el) => addRef(el, 1)}
               style={{ ...fadeStyle, transitionDelay: "80ms" }}
-              className="font-['DM_Serif_Display'] text-5xl text-[#2C3E50] leading-tight mb-6"
+              className="mb-6 font-['DM_Serif_Display'] text-4xl leading-tight text-[#2C3E50] sm:text-5xl"
             >
               About Me
             </h1>
@@ -59,15 +59,15 @@ export default function AboutPage() {
               className="text-[15px] leading-relaxed text-[#444] space-y-4 font-['DM_Sans']"
             >
               <p>
-                I'm studying Computer Science at UC Irvine, focused on building
+                I&apos;m studying Computer Science at UC Irvine, focused on building
                 my technical skills and getting real experience. In the short
                 term I want to ship a full-stack application that solves an
                 actual problem, join a research lab working on ML efficiency,
                 and land a SWE internship.
               </p>
               <p>
-                Long term I'm heading toward a career in software engineering.
-                Right now I'm trying to learn fast and find people to grow with.
+                Long term I&apos;m heading toward a career in software engineering.
+                Right now I&apos;m trying to learn fast and find people to grow with.
               </p>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default function AboutPage() {
             style={{ ...fadeStyle, transitionDelay: "240ms" }}
             className="flex-shrink-0"
           >
-            <div className="w-36 h-44 md:w-44 md:h-56 overflow-hidden bg-[#ddd]">
+            <div className="h-40 w-32 overflow-hidden bg-[#ddd] md:h-56 md:w-44">
               {/* Replace src with actual photo path */}
               <img
                 src="/chase.jpg"
@@ -101,7 +101,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="max-w-3xl mx-auto px-6">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <hr className="border-[#E0DDD6]" />
       </div>
 
@@ -109,9 +109,9 @@ export default function AboutPage() {
       <section
         ref={(el) => addRef(el, 4)}
         style={{ ...fadeStyle, transitionDelay: "0ms" }}
-        className="max-w-3xl mx-auto px-6 py-16"
+        className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16"
       >
-        <h2 className="font-['DM_Serif_Display'] text-3xl text-[#2C3E50] mb-8">
+        <h2 className="mb-8 font-['DM_Serif_Display'] text-2xl text-[#2C3E50] sm:text-3xl">
           Resume
         </h2>
 
@@ -158,7 +158,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="max-w-3xl mx-auto px-6">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <hr className="border-[#E0DDD6]" />
       </div>
 
@@ -166,9 +166,9 @@ export default function AboutPage() {
       <section
         ref={(el) => addRef(el, 5)}
         style={{ ...fadeStyle, transitionDelay: "0ms" }}
-        className="max-w-3xl mx-auto px-6 py-16"
+        className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16"
       >
-        <h2 className="font-['DM_Serif_Display'] text-3xl text-[#2C3E50] mb-8">
+        <h2 className="mb-8 font-['DM_Serif_Display'] text-2xl text-[#2C3E50] sm:text-3xl">
           Current Coursework
         </h2>
 
@@ -188,7 +188,7 @@ export default function AboutPage() {
         </ul>
       </section>
 
-      <div className="max-w-3xl mx-auto px-6">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <hr className="border-[#E0DDD6]" />
       </div>
 
@@ -196,15 +196,15 @@ export default function AboutPage() {
       <section
         ref={(el) => addRef(el, 10)}
         style={{ ...fadeStyle, transitionDelay: "0ms" }}
-        className="max-w-3xl mx-auto px-6 py-16"
+        className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16"
       >
-        <h2 className="font-['DM_Serif_Display'] text-3xl text-[#2C3E50] mb-6">
+        <h2 className="mb-6 font-['DM_Serif_Display'] text-2xl text-[#2C3E50] sm:text-3xl">
           Beyond the Terminal
         </h2>
 
         <div className="font-['DM_Sans'] text-[15px] leading-relaxed text-[#444] space-y-4 max-w-xl">
           <p>
-            Outside of CS, I am a jazz musician, hiker, and gym goer. I've been to 6 national parks, and I'm always planning the next road trip or vacation. 
+            Outside of CS, I am a jazz musician, hiker, and gym goer. I&apos;ve been to 6 national parks, and I&apos;m always planning the next road trip or vacation.
           </p>
           <p>
             I show up to hackathons partly for the fun and partly for the

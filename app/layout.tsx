@@ -39,7 +39,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-[#F7F5F0] font-sans text-[#0D0D0D]">
         <Header />
-        <main className="mx-auto w-full max-w-180 flex-1 px-10 pt-16">
+        <main className="mx-auto w-full max-w-180 flex-1 px-4 pt-10 sm:px-6 sm:pt-12 lg:px-10 lg:pt-16">
           {children}
           <Analytics />
         </main>

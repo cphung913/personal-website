@@ -75,7 +75,7 @@ function ProjectCard({
       {showDivider && (
         <hr className="border-t border-[rgba(13,13,13,0.08)] mb-0" />
       )}
-      <div className="grid grid-cols-[180px_1fr] gap-x-6 py-16" style={style}>
+      <div className="grid grid-cols-1 gap-y-4 py-10 sm:grid-cols-[180px_1fr] sm:gap-x-6 sm:gap-y-0 sm:py-16" style={style}>
         {/* Left column */}
         <div className="pt-1">
           <p
@@ -168,12 +168,12 @@ export default function ProjectsPage() {
       className="min-h-screen"
       style={{ background: "#F7F5F0" }}
     >
-      <div className="max-w-[720px] mx-auto px-10 pt-4 pb-24">
+      <div className="mx-auto max-w-[720px] px-4 pt-4 pb-16 sm:px-6 sm:pb-20 lg:px-10 lg:pb-24">
 
         {/* Page header */}
         <div className="mb-1" style={fadeStyle(0)}>
           <h1
-            className="text-[64px] leading-[1.05] mb-3"
+            className="mb-3 text-[clamp(40px,10vw,64px)] leading-[1.05]"
             style={{
               fontFamily: "'DM Serif Display', serif",
               color: "#2C3E50",
