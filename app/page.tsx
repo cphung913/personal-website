@@ -3,11 +3,12 @@ import Link from "next/link";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Project {
-  status: string;
+  date: string;
+  label: string;
   stack: string[];
   title: string;
   description: string;
-  href: string;
+  links: { label: string; href: string }[];
 }
 
 interface Post {
@@ -41,12 +42,19 @@ const POSTS: Post[] = [
 
 const PROJECTS: Project[] = [
   {
-    status: "Complete",
-    stack: ["React", "Next.js", "FastAPI", "Python", "SQLite", "Tesseract OCR"],
+    date: "MARCH 2026",
+    label: "IRVINEHACKS PROJECT",
+    stack: ["REACT", "NEXT.JS", "FASTAPI", "PYTHON", "SQLITE", "TESSERACT OCR"],
     title: "Property Risk Intelligence",
     description:
       "AI-powered document ingestion pipeline that extracts, classifies, and cross-checks property tax, title, and financial documents to flag collateral inconsistencies and generate structured risk findings for underwriter review. Built in 36 hours, validated with First American employees and industry underwriters.",
-    href: "/projects/property-risk-intelligence",
+    links: [
+      { label: "GITHUB", href: "https://github.com/cphung913/Irvine-Hacks-2026" },
+      {
+        label: "DEVPOST",
+        href: "https://devpost.com/software/property-risk-intelligence",
+      },
+    ],
   },
 ];
 
@@ -116,7 +124,7 @@ function FocusCard() {
 function RecentWriting() {
   return (
     <section className="mb-14">
-      <div className="mb-7 flex items-baseline justify-between">
+      <div className="mb-7 flex items-baseline justify-between border-b border-[rgba(13,13,13,0.08)] pb-7">
         <h2 className="font-serif text-[26px] text-[#2C3E50]">
           Recent Writing
         </h2>
@@ -129,7 +137,7 @@ function RecentWriting() {
       </div>
 
       {POSTS.map((post) => (
-        <div key={post.title} className="grid grid-cols-[120px_1fr] gap-x-6 border-b border-[rgba(13,13,13,0.08)] pb-7">
+        <div key={post.title} className="grid grid-cols-[120px_1fr] gap-x-6 pb-7">
           <div>
             <p className="mb-0.5 font-sans text-[11px] uppercase tracking-[0.08em] text-[#888880]">
               {post.date}
@@ -164,7 +172,7 @@ function RecentWriting() {
 function FeaturedProjects() {
   return (
     <section className="mb-20">
-      <div className="mb-7 flex items-baseline justify-between">
+      <div className="mb-7 flex items-baseline justify-between border-b border-[rgba(13,13,13,0.08)] pb-7">
         <h2 className="font-serif text-[26px] text-[#2C3E50]">
           Featured Projects
         </h2>
@@ -177,18 +185,14 @@ function FeaturedProjects() {
       </div>
 
       {PROJECTS.map((project) => (
-        <div key={project.title} className="grid grid-cols-[120px_1fr] gap-x-6 border-b border-[rgba(13,13,13,0.08)] pb-7">
-          <div>
-            <p className="mb-1.5 font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-[#888880]">
-              {project.status}
+        <div key={project.title} className="grid grid-cols-[180px_1fr] gap-x-6 pb-7">
+          <div className="pt-1">
+            <p className="mb-1 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-[#888880]">
+              {project.date}
             </p>
-            <div className="flex flex-col gap-0.5">
-              {project.stack.map((tag) => (
-                <span key={tag} className="font-mono text-[10px] text-[#888880]">
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-[#888880]">
+              {project.label}
+            </p>
           </div>
 
           <div>
@@ -198,12 +202,27 @@ function FeaturedProjects() {
             <p className="mb-3 font-sans text-sm leading-[1.7] text-[#0D0D0D]">
               {project.description}
             </p>
-            <Link
-              href={project.href}
-              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A6B4A] no-underline hover:scale-105 transition-transform duration-150"
-            >
-              View Project <ArrowIcon />
-            </Link>
+            <div className="mb-5 flex flex-wrap gap-x-4 gap-y-1">
+              {project.stack.map((tag) => (
+                <span
+                  key={tag}
+                  className="font-mono text-[10px] tracking-[0.08em] text-[#888880]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div className="flex gap-4">
+              {project.links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A6B4A] no-underline hover:scale-105 transition-transform duration-150"
+                >
+                  {link.label} <ArrowIcon />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       ))}

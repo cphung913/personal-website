@@ -1,12 +1,15 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
+
   const links = [
-    { label: "Home", href: "/", active: true },
+    { label: "Home", href: "/" },
     { label: "Projects", href: "/projects" },
-    { label: "Blog", href: "/blog" },
     { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" },
   ];
 
   return (
@@ -19,19 +22,24 @@ export default function Header() {
       </Link>
 
       <nav className="flex gap-7">
-        {links.map((l) => (
-          <Link
-            key={l.label}
-            href={l.href}
-            className={`font-sans text-[13px] transition-colors transition-transform duration-150 hover:text-[#1A6B4A] hover:scale-105 ${
-              l.active
-                ? "text-[#1A6B4A] underline underline-offset-[3px] decoration-2 font-bold"
-                : "text-[#888880] no-underline"
-            }`}
-          >
-            {l.label}
-          </Link>
-        ))}
+        {links.map((l) => {
+          const isActive =
+            l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
+
+          return (
+            <Link
+              key={l.label}
+              href={l.href}
+              className={`font-sans text-[13px] transition-colors transition-transform duration-150 hover:text-[#1A6B4A] hover:scale-105 ${
+                isActive
+                  ? "text-[#1A6B4A] underline underline-offset-[3px] decoration-2 font-bold"
+                  : "text-[#888880] no-underline"
+              }`}
+            >
+              {l.label}
+            </Link>
+          );
+        })}
       </nav>
     </header>
   );
