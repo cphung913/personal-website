@@ -62,7 +62,7 @@ export default function AboutPage() {
                 I&apos;m studying Computer Science at UC Irvine, focused on building
                 my technical skills and getting real experience. In the short
                 term I want to ship a full-stack application that solves an
-                actual problem, join a research lab working on ML efficiency,
+                actual problem, join a research lab,
                 and land a SWE internship.
               </p>
               <p>
@@ -204,10 +204,10 @@ export default function AboutPage() {
 
         <div className="font-['DM_Sans'] text-[15px] leading-relaxed text-[#444] space-y-4 max-w-xl">
           <p>
-            Outside of CS, I am a jazz musician, hiker, and gym goer. I&apos;ve been to 6 national parks, and I&apos;m always planning the next road trip or vacation.
+            Outside of CS, I am a jazz musician, hiker, and gym rat. I&apos;ve been to 6 national parks, and I&apos;m always planning the next road trip or flight.
           </p>
           <p>
-            I show up to hackathons partly for the fun and partly for the
+            I go to hackathons mostly for fun and partly for the
             free food.
           </p>
         </div>
