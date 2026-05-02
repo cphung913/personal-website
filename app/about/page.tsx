@@ -1,19 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const COURSEWORK = [
-  "ICS 6N: Linear Algebra",
+  "ICS 6B: Boolean Logic and Discrete Structures",
+  "ICS 6N: Computational Linear Algebra",
   "ICS 33: Intermediate Programming",
   "IN4MATX 43: Intro to Software Engineering",
-  "UNI STU 3: Thrive in Research",
 ];
 
 export default function AboutPage() {
-  const [pdfError, setPdfError] = useState(false);
   const fadeRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduced) {
+      fadeRefs.current.forEach((el) => {
+        if (!el) return;
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+        el.style.transition = "none";
+      });
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -33,53 +44,45 @@ export default function AboutPage() {
     fadeRefs.current[i] = el;
   };
 
-  const fadeStyle: React.CSSProperties = {
+  const fadeStyle = (delay = 0): React.CSSProperties => ({
     opacity: 0,
     transform: "translateY(20px)",
-    transition: "opacity 0.6s ease, transform 0.6s ease",
-  };
+    transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
+  });
 
   return (
-    <main className="min-h-screen bg-[#F7F5F0] text-[#0D0D0D]">
-      {/* ── Hero ── */}
-      <section className="mx-auto max-w-3xl px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-20">
+    <>
+      {/* Hero */}
+      <section className="pb-12 pt-4 sm:pb-16 sm:pt-8">
         <div className="flex flex-col-reverse md:flex-row md:items-start md:gap-12">
-          {/* Text */}
           <div className="flex-1 mt-8 md:mt-0">
             <h1
               ref={(el) => addRef(el, 1)}
-              style={{ ...fadeStyle, transitionDelay: "80ms" }}
-              className="mb-6 font-['DM_Serif_Display'] text-4xl leading-tight text-[#2C3E50] sm:text-5xl"
+              style={fadeStyle(80)}
+              className="mb-6 font-serif text-4xl leading-tight text-slate sm:text-5xl"
             >
               About Me
             </h1>
             <div
               ref={(el) => addRef(el, 2)}
-              style={{ ...fadeStyle, transitionDelay: "160ms" }}
-              className="text-[15px] leading-relaxed text-[#444] space-y-4 font-['DM_Sans']"
+              style={fadeStyle(160)}
+              className="font-sans text-[15px] leading-relaxed text-ink space-y-4 max-w-[65ch]"
             >
               <p>
-                I&apos;m studying Computer Science at UC Irvine, focused on building
-                my technical skills and getting real experience. In the short
-                term I want to ship a full-stack application that solves an
-                actual problem, join a research lab,
-                and land a SWE internship.
+                I&apos;m studying Computer Science at UC Irvine (GPA: 3.88), working as a Learning Assistant for ICS 6B and doing undergraduate ML research through UCI&apos;s UROP program. I&apos;m AWS Certified Cloud Practitioner.
               </p>
               <p>
-                Long term I&apos;m heading toward a career in software engineering.
-                Right now I&apos;m trying to learn fast and find people to grow with.
+                In the short term I want to ship products that solve real problems and land a SWE internship. Long term I&apos;m heading toward a career in software engineering. Right now I&apos;m trying to learn fast and find people to grow with.
               </p>
             </div>
           </div>
 
-          {/* Photo + location */}
           <div
             ref={(el) => addRef(el, 3)}
-            style={{ ...fadeStyle, transitionDelay: "240ms" }}
+            style={fadeStyle(240)}
             className="flex-shrink-0"
           >
             <div className="h-40 w-32 overflow-hidden bg-[#ddd] md:h-56 md:w-44">
-              {/* Replace src with actual photo path */}
               <img
                 src="/chase.jpg"
                 alt="Chase Phung"
@@ -90,10 +93,10 @@ export default function AboutPage() {
               />
             </div>
             <div className="mt-4">
-              <p className="text-[10px] tracking-[0.2em] text-[#888880] uppercase">
+              <p className="font-sans text-[10px] tracking-[0.2em] text-pencil uppercase">
                 Location
               </p>
-              <p className="text-[11px] tracking-[0.15em] text-[#2C3E50] uppercase font-semibold mt-0.5">
+              <p className="font-sans text-[11px] tracking-[0.15em] text-slate uppercase font-semibold mt-0.5">
                 Irvine, California
               </p>
             </div>
@@ -101,43 +104,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-3xl px-4 sm:px-6">
-        <hr className="border-[#E0DDD6]" />
-      </div>
-
-      {/* ── Resume ── */}
+      {/* Resume */}
       <section
         ref={(el) => addRef(el, 4)}
-        style={{ ...fadeStyle, transitionDelay: "0ms" }}
-        className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16"
+        style={fadeStyle(0)}
+        className="py-12 sm:py-16"
       >
-        <h2 className="mb-8 font-['DM_Serif_Display'] text-2xl text-[#2C3E50] sm:text-3xl">
+        <h2 className="mb-8 font-serif text-2xl text-slate sm:text-3xl">
           Resume
         </h2>
 
-        {!pdfError ? (
-          <div className="border border-[#E0DDD6] bg-white overflow-hidden">
-            <iframe
-              src="/resume.pdf#page=1&zoom=page-width&pagemode=none&navpanes=0&toolbar=0&scrollbar=0"
-              className="w-full"
-              style={{ height: "680px" }}
-              title="Chase Phung Resume"
-              onError={() => setPdfError(true)}
-            />
-          </div>
-        ) : (
-          <div className="border border-[#E0DDD6] bg-white p-10 text-center">
-            <p className="text-sm text-[#888880] mb-4 font-['DM_Sans']">
-              Unable to load PDF preview.
-            </p>
-          </div>
-        )}
+        <div className="border border-[rgba(13,13,13,0.08)] bg-warm-ash overflow-hidden">
+          <iframe
+            src="/resume.pdf#page=1&zoom=page-width&pagemode=none&navpanes=0&toolbar=0&scrollbar=0"
+            className="w-full"
+            style={{ height: "680px" }}
+            title="Chase Phung Resume"
+          />
+        </div>
 
         <div className="mt-4 flex justify-end">
           <a
             href="/resume.pdf"
             download
-            className="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase bg-[#1A6B4A] text-white px-5 py-2.5 hover:bg-[#155a3d] transition-colors duration-200 font-['DM_Sans']"
+            className="inline-flex items-center gap-2 font-sans text-[11px] tracking-[0.15em] uppercase bg-forest text-warm-ash px-5 py-2.5 transition-colors duration-150 hover:bg-forest-deep"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -158,63 +148,49 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-3xl px-4 sm:px-6">
-        <hr className="border-[#E0DDD6]" />
-      </div>
-
-      {/* ── Coursework ── */}
+      {/* Coursework */}
       <section
         ref={(el) => addRef(el, 5)}
-        style={{ ...fadeStyle, transitionDelay: "0ms" }}
-        className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16"
+        style={fadeStyle(0)}
+        className="py-12 sm:py-16"
       >
-        <h2 className="mb-8 font-['DM_Serif_Display'] text-2xl text-[#2C3E50] sm:text-3xl">
+        <h2 className="mb-8 font-serif text-2xl text-slate sm:text-3xl">
           Current Coursework
         </h2>
 
-        <ul className="list-disc space-y-4 pl-5">
+        <ul className="space-y-3 list-none p-0">
           {COURSEWORK.map((course, i) => (
             <li
               key={i}
               ref={(el) => addRef(el, 6 + i)}
-              style={{ ...fadeStyle, transitionDelay: `${i * 60}ms` }}
-              className="text-[#2C3E50]"
+              style={fadeStyle(i * 60)}
+              className="font-sans text-[15px] leading-snug text-ink"
             >
-              <p className="font-['DM_Serif_Display'] text-lg leading-snug">
-                {course}
-              </p>
+              {course}
             </li>
           ))}
         </ul>
       </section>
 
-      <div className="mx-auto max-w-3xl px-4 sm:px-6">
-        <hr className="border-[#E0DDD6]" />
-      </div>
-
-      {/* ── Beyond the Terminal ── */}
+      {/* Beyond the Terminal */}
       <section
         ref={(el) => addRef(el, 10)}
-        style={{ ...fadeStyle, transitionDelay: "0ms" }}
-        className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16"
+        style={fadeStyle(0)}
+        className="py-12 sm:py-16"
       >
-        <h2 className="mb-6 font-['DM_Serif_Display'] text-2xl text-[#2C3E50] sm:text-3xl">
+        <h2 className="mb-6 font-serif text-2xl text-slate sm:text-3xl">
           Beyond the Terminal
         </h2>
 
-        <div className="font-['DM_Sans'] text-[15px] leading-relaxed text-[#444] space-y-4 max-w-xl">
+        <div className="font-sans text-[15px] leading-relaxed text-ink space-y-4 max-w-[65ch]">
           <p>
             Outside of CS, I am a jazz musician, hiker, and gym rat. I&apos;ve been to 6 national parks, and I&apos;m always planning the next road trip or flight.
           </p>
           <p>
-            I go to hackathons mostly for fun and partly for the
-            free food.
+            I go to hackathons mostly for fun and partly for the free food.
           </p>
         </div>
-
-        
       </section>
-
-    </main>
+    </>
   );
 }

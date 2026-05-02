@@ -2,7 +2,7 @@
 export default function Footer() {
   return (
     <footer className="flex flex-col items-start gap-4 border-t border-[rgba(13,13,13,0.08)] px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-12">
-      <p className="font-sans text-[11px] uppercase tracking-[0.08em] text-[#888880]">
+      <p className="font-sans text-[11px] uppercase tracking-[0.08em] text-pencil">
         © 2026 Chase Phung
       </p>
 
@@ -15,7 +15,7 @@ export default function Footer() {
           <a
             key={l.label}
             href={l.href}
-            className="font-sans text-[11px] uppercase tracking-[0.08em] text-[#888880] no-underline hover:text-[#1A6B4A] hover:scale-105 transition-colors transition-transform duration-150"
+            className="font-sans text-[11px] uppercase tracking-[0.08em] text-pencil no-underline transition-colors duration-150 hover:text-forest"
           >
             {l.label}
           </a>

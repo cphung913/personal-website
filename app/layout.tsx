@@ -1,24 +1,23 @@
 import type { Metadata } from "next";
-import { DM_Sans, DM_Serif_Display, JetBrains_Mono } from "next/font/google";
+import { Spectral, JetBrains_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Footer from "../components/shell/footer";
 import Header from "../components/shell/header";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const spectral = Spectral({
+  variable: "--font-spectral",
   subsets: ["latin"],
-});
-
-const dmSerifDisplay = DM_Serif_Display({
-  variable: "--font-dm-serif",
-  subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "600", "700", "800"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -35,9 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${dmSerifDisplay.variable} ${jetBrainsMono.variable} h-full antialiased`}
+      className={`${spectral.variable} ${GeistSans.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-[#F7F5F0] font-sans text-[#0D0D0D]">
+      <body className="flex min-h-full flex-col bg-warm-ash font-sans text-ink">
         <Header />
         <main className="mx-auto w-full max-w-180 flex-1 px-4 pt-10 sm:px-6 sm:pt-12 lg:px-10 lg:pt-16">
           {children}

@@ -3,8 +3,6 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import Link from "next/link";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
 interface Project {
   date: string;
   label: string;
@@ -14,33 +12,32 @@ interface Project {
   links: { label: string; href: string }[];
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
 const PROJECTS: Project[] = [
   {
-    date: "PRESENT",
-    label: "ACTIVE DEV",
-    title: "ML Compression Ordering Benchmark",
+    date: "April 2026",
+    label: "UCI AWS Cloud Hacks",
+    title: "DownStream",
     description:
-      "This project benchmarks three standard ML compression techniques (quantization, attention head pruning, and knowledge distillation) against a BERT-base baseline, measuring the efficiency to accuracy tradeoff across five experimental configurations on AWS EC2 GPU hardware.",
-    stack: ["PYTHON", "PYTORCH", "DOCKER", "AWS"],
-    links: [{ label: "GITHUB", href: "https://github.com/cphung913" }],
+      "Won Best AI for Environmental Impact at UCI AWS Cloud Hacks 2026. A real-time chemical spill propagation simulator for emergency managers, using the Mississippi River as a geospatial case study. Budget-constrained mitigation options use spill-type-aware effectiveness logic anchored to FEMA HMGP cost benchmarks from 597 federal projects. Integrated Amazon Location Service for map infrastructure and deployed via AWS Amplify, resolving a 10-hour deployment blocker with secrets configuration.",
+    stack: ["React", "TypeScript", "AWS"],
+    links: [
+      { label: "Devpost", href: "https://devpost.com/software/downstream-kytmub"},
+      { label: "GitHub", href: "https://github.com/cphung913/DownStream-AWSCloudHacks"}
+    ],
   },
   {
-    date: "MARCH 2026",
-    label: "IRVINEHACKS PROJECT",
+    date: "March 2026",
+    label: "IrvineHacks",
     title: "Property Risk Intelligence",
     description:
-      "AI-powered document ingestion pipeline that extracts, classifies, and cross-checks property tax, title, and financial documents to flag collateral inconsistencies and generate structured risk findings for underwriter review. Built in 36 hours, validated with First American employees and industry underwriters.",
-    stack: ["REACT", "NEXT.JS", "FASTAPI", "PYTHON", "SQLITE", "TESSERACT OCR"],
+      "OCR-based document analysis system that identifies inconsistencies in property underwriting workflows, targeting risk detection across tax, title, and financial documents. Rule-based classification and discrepancy detection logic extracts and validates structured financial data. Validated system design and risk criteria through direct consultation with First American employees and industry underwriters during a 36-hour hackathon.",
+    stack: ["React", "Next.js", "FastAPI", "Python", "SQLite", "Tesseract OCR"],
     links: [
-      { label: "GITHUB", href: "https://github.com/cphung913/Irvine-Hacks-2026" },
-      { label: "DEVPOST", href: "https://devpost.com/software/property-risk-intelligence" },
+      { label: "GitHub", href: "https://github.com/cphung913/Irvine-Hacks-2026" },
+      { label: "Devpost", href: "https://devpost.com/software/property-risk-intelligence" },
     ],
   },
 ];
-
-// ─── Arrow Icon ───────────────────────────────────────────────────────────────
 
 function ArrowIcon() {
   return (
@@ -59,100 +56,66 @@ function ArrowIcon() {
   );
 }
 
-// ─── Project Card ─────────────────────────────────────────────────────────────
-
 function ProjectCard({
   project,
-  showDivider,
+  spacingTop,
   style,
 }: {
   project: Project;
-  showDivider: boolean;
+  spacingTop: boolean;
   style?: CSSProperties;
 }) {
   return (
-    <>
-      {showDivider && (
-        <hr className="border-t border-[rgba(13,13,13,0.08)] mb-0" />
-      )}
-      <div className="grid grid-cols-1 gap-y-4 py-10 sm:grid-cols-[180px_1fr] sm:gap-x-6 sm:gap-y-0 sm:py-16" style={style}>
-        {/* Left column */}
-        <div className="pt-1">
-          <p
-            className="text-[11px] font-medium tracking-[0.1em] uppercase mb-1"
-            style={{ color: "#888880", fontFamily: "'DM Sans', sans-serif" }}
-          >
-            {project.date}
-          </p>
-          <p
-            className="text-[11px] font-medium tracking-[0.1em] uppercase"
-            style={{ color: "#888880", fontFamily: "'DM Sans', sans-serif" }}
-          >
-            {project.label}
-          </p>
-        </div>
+    <div
+      className={`grid grid-cols-1 gap-y-4 py-10 sm:grid-cols-[180px_1fr] sm:gap-x-6 sm:gap-y-0 sm:py-16 ${spacingTop ? "pt-14 sm:pt-16" : ""}`}
+      style={style}
+    >
+      <div className="pt-1">
+        <p className="mb-1 font-sans text-[11px] font-medium tracking-[0.1em] uppercase text-pencil">
+          {project.date}
+        </p>
+        <p className="font-sans text-[11px] font-medium tracking-[0.1em] uppercase text-pencil">
+          {project.label}
+        </p>
+      </div>
 
-        {/* Right column */}
-        <div>
-          <h2
-            className="text-[28px] leading-[1.2] mb-4"
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              color: "#2C3E50",
-            }}
-          >
-            {project.title}
-          </h2>
+      <div>
+        <h2 className="mb-4 font-serif text-[28px] leading-[1.2] text-slate">
+          {project.title}
+        </h2>
 
-          <p
-            className="text-[15px] leading-[1.7] mb-5"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "#2C3E50" }}
-          >
-            {project.description}
-          </p>
+        <p className="mb-5 font-sans text-[15px] leading-[1.7] text-ink">
+          {project.description}
+        </p>
 
-          {/* Stack tags */}
-          <div className="flex flex-wrap gap-x-4 gap-y-1 mb-5">
-            {project.stack.map((tag) => (
-              <span
-                key={tag}
-                className="text-[10px] tracking-[0.08em]"
-                style={{ fontFamily: "'JetBrains Mono', monospace", color: "#888880" }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+        <p className="mb-5 font-sans text-[11px] text-pencil">
+          {project.stack.join(" · ")}
+        </p>
 
-          {/* Links */}
-          <div className="flex gap-4">
-            {project.links.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-[0.08em] uppercase transition-opacity hover:opacity-70"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  color: "#1A6B4A",
-                  textDecoration: "none",
-                }}
-              >
-                {link.label} <ArrowIcon />
-              </Link>
-            ))}
-          </div>
+        <div className="flex gap-4">
+          {project.links.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium tracking-[0.08em] uppercase text-forest no-underline transition-colors duration-150 hover:underline"
+            >
+              {link.label} <ArrowIcon />
+            </Link>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ProjectsPage() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsVisible(true);
+      return;
+    }
     const id = requestAnimationFrame(() => setIsVisible(true));
     return () => cancelAnimationFrame(id);
   }, []);
@@ -164,44 +127,26 @@ export default function ProjectsPage() {
   });
 
   return (
-    <main
-      className="min-h-screen"
-      style={{ background: "#F7F5F0" }}
-    >
-      <div className="mx-auto max-w-[720px] px-4 pt-4 pb-16 sm:px-6 sm:pb-20 lg:px-10 lg:pb-24">
-
-        {/* Page header */}
-        <div className="mb-1" style={fadeStyle(0)}>
-          <h1
-            className="mb-3 text-[clamp(40px,10vw,64px)] leading-[1.05]"
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              color: "#2C3E50",
-            }}
-          >
-            Projects
-          </h1>
-          <p
-            className="text-[15px]"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "#888880" }}
-          >
-            Things I&apos;ve built.
-          </p>
-        </div>
-
-        {/* Project list */}
-        <div>
-          {PROJECTS.map((project, i) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              showDivider={i > 0}
-              style={fadeStyle(120 + i * 80)}
-            />
-          ))}
-        </div>
-
+    <>
+      <div className="mb-1" style={fadeStyle(0)}>
+        <h1 className="mb-3 font-serif text-[clamp(40px,10vw,64px)] leading-[1.05] text-slate">
+          Projects
+        </h1>
+        <p className="font-sans text-[15px] text-pencil">
+          Things I&apos;ve built.
+        </p>
       </div>
-    </main>
+
+      <div>
+        {PROJECTS.map((project, i) => (
+          <ProjectCard
+            key={project.title}
+            project={project}
+            spacingTop={i > 0}
+            style={fadeStyle(120 + i * 80)}
+          />
+        ))}
+      </div>
+    </>
   );
 }

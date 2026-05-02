@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
 interface Project {
   date: string;
   label: string;
@@ -14,16 +12,6 @@ interface Project {
   links: { label: string; href: string }[];
 }
 
-interface Post {
-  date: string;
-  readTime: string;
-  title: string;
-  summary: string;
-  href: string;
-}
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
 const FOCUS = {
   label: "Current Technical Focus",
   title: "ML Efficiency Research",
@@ -32,36 +20,32 @@ const FOCUS = {
   status: "In Progress",
 };
 
-const POSTS: Post[] = [
-  {
-    date: "Mar 2025",
-    readTime: "8 min read",
-    title: "Why Compression Order Matters in Transformer Inference",
-    summary:
-      "Quantization before pruning vs. after — the ordering changes everything. A look at why sequencing compression ops isn't arbitrary.",
-    href: "/blog/compression-ordering",
-  },
-];
-
 const PROJECTS: Project[] = [
   {
-    date: "MARCH 2026",
-    label: "IRVINEHACKS PROJECT",
-    stack: ["REACT", "NEXT.JS", "FASTAPI", "PYTHON", "SQLITE", "TESSERACT OCR"],
+    date: "April 2026",
+    label: "UCI AWS Cloud Hacks",
+    stack: ["React", "TypeScript", "AWS"],
+    title: "DownStream",
+    description:
+      "Won Best AI for Environmental Impact at UCI AWS Cloud Hacks 2026. A real-time chemical spill propagation simulator for emergency managers, using the Mississippi River as a geospatial case study. Features budget-constrained mitigation options with spill-type-aware effectiveness logic anchored to FEMA HMGP cost benchmarks from 597 federal projects. Deployed via AWS Amplify with Amazon Location Service for map infrastructure.",
+    links: [
+      { label: "Devpost", href: "https://devpost.com/software/downstream-kytmub" },
+      { label: "GitHub", href: "https://github.com/cphung913/DownStream-AWSCloudHacks"},
+    ],
+  },
+  {
+    date: "March 2026",
+    label: "IrvineHacks",
+    stack: ["React", "Next.js", "FastAPI", "Python", "SQLite", "Tesseract OCR"],
     title: "Property Risk Intelligence",
     description:
-      "AI-powered document ingestion pipeline that extracts, classifies, and cross-checks property tax, title, and financial documents to flag collateral inconsistencies and generate structured risk findings for underwriter review. Built in 36 hours, validated with First American employees and industry underwriters.",
+      "OCR-based document analysis system that identifies inconsistencies in property underwriting workflows, targeting risk detection across tax, title, and financial documents. Rule-based classification and discrepancy detection logic extracts and validates structured financial data. Validated system design and risk criteria through direct consultation with First American employees and industry underwriters during a 36-hour hackathon.",
     links: [
-      { label: "GITHUB", href: "https://github.com/cphung913/Irvine-Hacks-2026" },
-      {
-        label: "DEVPOST",
-        href: "https://devpost.com/software/property-risk-intelligence",
-      },
+      { label: "GitHub", href: "https://github.com/cphung913/Irvine-Hacks-2026" },
+      { label: "Devpost", href: "https://devpost.com/software/property-risk-intelligence" },
     ],
   },
 ];
-
-// ─── Icons ────────────────────────────────────────────────────────────────────
 
 function GitHubIcon() {
   return (
@@ -87,6 +71,16 @@ function MailIcon() {
   );
 }
 
+function DownloadIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  );
+}
+
 function ArrowIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -95,26 +89,24 @@ function ArrowIcon() {
   );
 }
 
-// ─── Focus Card ───────────────────────────────────────────────────────────────
-
 function FocusCard() {
   return (
-    <div className="mb-12 rounded-[6px] border border-[rgba(13,13,13,0.1)] border-l-[3px] border-l-[#1A6B4A] bg-[rgba(26,107,74,0.02)] px-6 py-5">
-      <p className="mb-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.12em] text-[#888880]">
+    <div className="mb-12 rounded-[2px] border border-[oklch(43%_0.099_155_/_0.15)] bg-fog px-6 py-5">
+      <p className="mb-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.12em] text-pencil">
         {FOCUS.label}
       </p>
 
-      <h2 className="mb-3 font-serif text-[22px] leading-[1.25] text-[#2C3E50]">
+      <h2 className="mb-3 font-serif text-[22px] leading-[1.25] text-slate">
         {FOCUS.title}
       </h2>
 
-      <p className="mb-4 max-w-[520px] font-sans text-sm leading-[1.7] text-[#0D0D0D]">
+      <p className="mb-4 max-w-[520px] font-sans text-sm leading-[1.7] text-ink">
         {FOCUS.description}
       </p>
 
       <div className="flex items-center gap-2">
-        <span className="inline-block h-[7px] w-[7px] shrink-0 rounded-full bg-[#1A6B4A]" />
-        <span className="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-[#888880]">
+        <span className="inline-block h-[7px] w-[7px] shrink-0 rounded-full bg-forest" />
+        <span className="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-pencil">
           Status: {FOCUS.status}
         </span>
       </div>
@@ -122,66 +114,16 @@ function FocusCard() {
   );
 }
 
-// ─── Recent Writing ───────────────────────────────────────────────────────────
-
-function RecentWriting() {
-  return (
-    <section className="mb-14">
-      <div className="mb-7 flex items-baseline justify-between border-b border-[rgba(13,13,13,0.08)] pb-5 sm:pb-7">
-        <h2 className="font-serif text-[22px] text-[#2C3E50] sm:text-[26px]">
-          Recent Writing
-        </h2>
-        <Link
-          href="/blog"
-          className="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-[#888880] no-underline hover:text-[#1A6B4A]"
-        >
-          View All
-        </Link>
-      </div>
-
-      {POSTS.map((post) => (
-        <div key={post.title} className="grid grid-cols-1 gap-y-3 pb-7 sm:grid-cols-[120px_1fr] sm:gap-x-6 sm:gap-y-0">
-          <div>
-            <p className="mb-0.5 font-sans text-[11px] uppercase tracking-[0.08em] text-[#888880]">
-              {post.date}
-            </p>
-            <p className="font-sans text-[11px] uppercase tracking-[0.08em] text-[#888880]">
-              {post.readTime}
-            </p>
-          </div>
-
-          <div>
-            <h3 className="mb-2 font-serif text-[18px] leading-[1.3] text-[#2C3E50]">
-              {post.title}
-            </h3>
-            <p className="mb-3 font-sans text-sm leading-[1.7] text-[#0D0D0D]">
-              {post.summary}
-            </p>
-            <Link
-              href={post.href}
-              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A6B4A] no-underline hover:scale-105 transition-transform duration-150"
-            >
-              Read Essay <ArrowIcon />
-            </Link>
-          </div>
-        </div>
-      ))}
-    </section>
-  );
-}
-
-// ─── Featured Projects ────────────────────────────────────────────────────────
-
 function FeaturedProjects() {
   return (
     <section className="mb-20">
-      <div className="mb-7 flex items-baseline justify-between border-b border-[rgba(13,13,13,0.08)] pb-5 sm:pb-7">
-        <h2 className="font-serif text-[22px] text-[#2C3E50] sm:text-[26px]">
+      <div className="mb-7 flex items-baseline justify-between">
+        <h2 className="font-serif text-[22px] text-slate sm:text-[26px]">
           Featured Projects
         </h2>
         <Link
           href="/projects"
-          className="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-[#888880] no-underline hover:text-[#1A6B4A]"
+          className="py-3 -my-3 font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-pencil no-underline transition-colors duration-150 hover:text-forest"
         >
           View All
         </Link>
@@ -190,37 +132,30 @@ function FeaturedProjects() {
       {PROJECTS.map((project) => (
         <div key={project.title} className="grid grid-cols-1 gap-y-3 pb-7 sm:grid-cols-[180px_1fr] sm:gap-x-6 sm:gap-y-0">
           <div className="pt-1">
-            <p className="mb-1 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-[#888880]">
+            <p className="mb-1 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-pencil">
               {project.date}
             </p>
-            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-[#888880]">
+            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-pencil">
               {project.label}
             </p>
           </div>
 
           <div>
-            <h3 className="mb-2 font-serif text-[18px] text-[#2C3E50]">
+            <h3 className="mb-2 font-serif text-[18px] text-slate">
               {project.title}
             </h3>
-            <p className="mb-3 font-sans text-sm leading-[1.7] text-[#0D0D0D]">
+            <p className="mb-3 font-sans text-sm leading-[1.7] text-ink">
               {project.description}
             </p>
-            <div className="mb-5 flex flex-wrap gap-x-4 gap-y-1">
-              {project.stack.map((tag) => (
-                <span
-                  key={tag}
-                  className="font-mono text-[10px] tracking-[0.08em] text-[#888880]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <p className="mb-5 font-sans text-[11px] text-pencil">
+              {project.stack.join(" · ")}
+            </p>
             <div className="flex gap-4">
               {project.links.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-[#1A6B4A] no-underline hover:scale-105 transition-transform duration-150"
+                  className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-forest no-underline transition-colors duration-150 hover:underline"
                 >
                   {link.label} <ArrowIcon />
                 </Link>
@@ -233,12 +168,14 @@ function FeaturedProjects() {
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsVisible(true);
+      return;
+    }
     const id = requestAnimationFrame(() => setIsVisible(true));
     return () => cancelAnimationFrame(id);
   }, []);
@@ -251,48 +188,42 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero */}
       <section className="mb-12" style={fadeStyle(0)}>
-        <p className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-[#888880]">
+        <p className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-pencil">
           CS Freshman · UC Irvine
         </p>
 
-        <h1 className="mb-5 font-serif text-[clamp(38px,10vw,64px)] leading-[1.05] text-[#2C3E50]">
+        <h1 className="mb-5 font-serif text-[clamp(38px,10vw,64px)] leading-[1.05] text-slate">
           Chase Phung
         </h1>
 
-        <p className="mb-6 max-w-[480px] font-sans text-base leading-[1.7] text-[#0D0D0D]">
-          Freshman at UC Irvine studying Computer Science. Aspriring software engineer with a focus on impact driven full-stack development and machine learning research.
+        <p className="mb-6 max-w-[480px] font-sans text-base leading-[1.7] text-ink">
+          Freshman at UC Irvine studying Computer Science. Learning Assistant for ICS 6B and aspiring undergraduate ML researcher through UCI's UROP research discovery program. Hackathon Winner and   AWS Certified Cloud Practitioner.
         </p>
 
-        {/* Social links */}
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
           {[
-            {
-              icon: <GitHubIcon />,
-              href: "https://github.com/cphung913",
-              label: "GitHub",
-            },
-            {
-              icon: <LinkedInIcon />,
-              href: "https://linkedin.com/in/chasephung",
-              label: "LinkedIn",
-            },
-            {
-              icon: <MailIcon />,
-              href: "mailto:chasephung13@gmail.com",
-              label: "Email",
-            },
+            { icon: <GitHubIcon />, href: "https://github.com/cphung913", label: "GitHub" },
+            { icon: <LinkedInIcon />, href: "https://linkedin.com/in/chasephung", label: "LinkedIn" },
+            { icon: <MailIcon />, href: "mailto:chasephung13@gmail.com", label: "Email" },
           ].map((s) => (
             <a
               key={s.label}
               href={s.href}
               aria-label={s.label}
-              className="flex items-center text-[#2C3E50] no-underline transition-colors duration-150 hover:text-[#1A6B4A]"
+              className="flex items-center text-slate no-underline transition-colors duration-150 hover:text-forest"
             >
               {s.icon}
             </a>
           ))}
+
+          <a
+            href="/resume.pdf"
+            download
+            className="inline-flex items-center gap-2 bg-forest text-warm-ash font-sans text-[11px] font-medium tracking-[0.15em] uppercase px-4 py-2 transition-colors duration-150 hover:bg-forest-deep"
+          >
+            <DownloadIcon /> Resume
+          </a>
         </div>
       </section>
 
@@ -302,7 +233,6 @@ export default function HomePage() {
       <div style={fadeStyle(160)}>
         <FeaturedProjects />
       </div>
-      {/* <RecentWriting /> */}
     </>
   );
 }
