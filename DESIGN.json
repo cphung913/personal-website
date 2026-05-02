@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-01T00:00:00Z",
+  "title": "Design System: Chase Phung Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "warm-ash":    { "role": "neutral",   "displayName": "Warm Ash",    "canonical": "oklch(96.5% 0.006 89)",  "tonalRamp": ["oklch(15% 0.006 89)", "oklch(30% 0.006 89)", "oklch(45% 0.006 89)", "oklch(58% 0.006 89)", "oklch(70% 0.006 89)", "oklch(81% 0.006 89)", "oklch(90% 0.006 89)", "oklch(96.5% 0.006 89)"] },
+      "ink":         { "role": "neutral",   "displayName": "Ink",         "canonical": "oklch(10.5% 0.003 89)",  "tonalRamp": ["oklch(10.5% 0.003 89)", "oklch(18% 0.003 89)", "oklch(28% 0.003 89)", "oklch(40% 0.003 89)", "oklch(52% 0.003 89)", "oklch(64% 0.003 89)", "oklch(78% 0.003 89)", "oklch(90% 0.003 89)"] },
+      "slate":       { "role": "neutral",   "displayName": "Slate",       "canonical": "oklch(28.5% 0.038 243)", "tonalRamp": ["oklch(12% 0.038 243)", "oklch(20% 0.038 243)", "oklch(28.5% 0.038 243)", "oklch(38% 0.038 243)", "oklch(50% 0.038 243)", "oklch(63% 0.038 243)", "oklch(77% 0.020 243)", "oklch(90% 0.010 243)"] },
+      "forest":      { "role": "primary",   "displayName": "Forest",      "canonical": "oklch(43% 0.099 155)",   "tonalRamp": ["oklch(18% 0.099 155)", "oklch(26% 0.099 155)", "oklch(34% 0.099 155)", "oklch(43% 0.099 155)", "oklch(53% 0.099 155)", "oklch(63% 0.090 155)", "oklch(76% 0.060 155)", "oklch(90% 0.030 155)"] },
+      "forest-deep": { "role": "primary",   "displayName": "Forest Deep", "canonical": "oklch(37% 0.090 155)",   "tonalRamp": ["oklch(15% 0.090 155)", "oklch(22% 0.090 155)", "oklch(30% 0.090 155)", "oklch(37% 0.090 155)", "oklch(46% 0.090 155)", "oklch(57% 0.082 155)", "oklch(70% 0.055 155)", "oklch(85% 0.025 155)"] },
+      "pencil":      { "role": "neutral",   "displayName": "Pencil",      "canonical": "oklch(49% 0.008 89)",    "tonalRamp": ["oklch(15% 0.008 89)", "oklch(25% 0.008 89)", "oklch(35% 0.008 89)", "oklch(49% 0.008 89)", "oklch(60% 0.008 89)", "oklch(72% 0.008 89)", "oklch(83% 0.008 89)", "oklch(93% 0.008 89)"] },
+      "fog":         { "role": "neutral",   "displayName": "Fog",         "canonical": "oklch(93.5% 0.010 150)", "tonalRamp": ["oklch(18% 0.010 150)", "oklch(30% 0.010 150)", "oklch(44% 0.010 150)", "oklch(57% 0.010 150)", "oklch(68% 0.010 150)", "oklch(78% 0.010 150)", "oklch(87% 0.010 150)", "oklch(93.5% 0.010 150)"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero name. One instance per page only. Spectral 700 at clamp scale." },
+      "headline": { "displayName": "Headline", "purpose": "Section headers (Featured Projects, Resume). Spectral 600." },
+      "title":    { "displayName": "Title",    "purpose": "Project titles, post titles. Spectral 400." },
+      "body":     { "displayName": "Body",     "purpose": "All prose. Max 65ch line length. Geist 400." },
+      "label":    { "displayName": "Label",    "purpose": "Dates, metadata, stack names, section links. Geist 500 uppercase. Pencil color." },
+      "mono":     { "displayName": "Mono",     "purpose": "Code blocks and inline code only. JetBrains Mono. Never for decorative stack tags." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-exit",    "value": "cubic-bezier(0.16, 1, 0.3, 1)",  "purpose": "Default easing for all transitions. Ease-out-expo. No bounce, no elastic." },
+      { "name": "duration-fast","value": "150ms",                            "purpose": "Color and opacity state transitions (link hover, button hover)." },
+      { "name": "duration-std", "value": "600ms",                            "purpose": "Page-load fade-in/translate-up sequence." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px",  "purpose": "Single-column to two-column layout transition." },
+      { "name": "md", "value": "768px",  "purpose": "Hero photo layout switch (stacked to side-by-side)." },
+      { "name": "lg", "value": "1024px", "purpose": "Max-width container (max-w-180 / 720px)." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Used for the resume download CTA and any primary page action. Sharp corners, uppercase, tracked.",
+      "html": "<a href=\"/resume.pdf\" download class=\"ds-btn-primary\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/></svg> Download Resume</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: oklch(43% 0.099 155); color: oklch(96.5% 0.006 89); padding: 10px 20px; font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border: none; border-radius: 0; cursor: pointer; transition: background 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background: oklch(37% 0.090 155); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(43% 0.099 155); outline-offset: 3px; }"
+    },
+    {
+      "name": "Accent Link with Arrow",
+      "kind": "custom",
+      "refersTo": "link-accent",
+      "description": "Secondary actions: GitHub, Devpost, View All, Read Essay. Forest color at rest, underline on hover.",
+      "html": "<a href=\"#\" class=\"ds-link-accent\">View All <svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 6h8M6 2l4 4-4 4\"/></svg></a>",
+      "css": ".ds-link-accent { display: inline-flex; align-items: center; gap: 6px; color: oklch(43% 0.099 155); font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: color 150ms cubic-bezier(0.16, 1, 0.3, 1), text-decoration-color 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-link-accent:hover { text-decoration: underline; text-decoration-color: oklch(43% 0.099 155 / 0.5); } .ds-link-accent:focus-visible { outline: 2px solid oklch(43% 0.099 155); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Horizontal nav. Name left, links right. Pencil at rest, Slate on hover, Forest on active route.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-name\">Chase Phung</span><div class=\"ds-nav-links\"><a href=\"/\" class=\"ds-nav-link ds-nav-link--active\">Home</a><a href=\"/projects\" class=\"ds-nav-link\">Projects</a><a href=\"/about\" class=\"ds-nav-link\">About</a></div></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; } .ds-nav-name { font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 14px; font-weight: 500; color: oklch(28.5% 0.038 243); text-decoration: none; } .ds-nav-links { display: flex; gap: 32px; } .ds-nav-link { font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 14px; font-weight: 400; color: oklch(49% 0.008 89); text-decoration: none; transition: color 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-link:hover { color: oklch(28.5% 0.038 243); } .ds-nav-link--active { color: oklch(43% 0.099 155); } .ds-nav-link:focus-visible { outline: 2px solid oklch(43% 0.099 155); outline-offset: 3px; }"
+    },
+    {
+      "name": "Focus Card",
+      "kind": "card",
+      "refersTo": "focus-card",
+      "description": "Above-the-fold current research/focus panel. Fog background with full Forest border at 15% opacity. No side stripe.",
+      "html": "<div class=\"ds-focus-card\"><p class=\"ds-focus-card__label\">Current Technical Focus</p><h2 class=\"ds-focus-card__title\">ML Efficiency Research</h2><p class=\"ds-focus-card__desc\">Surveying ML efficiency literature with a PhD student mentor through UCI's UROP Discovery Program.</p><div class=\"ds-focus-card__status\"><span class=\"ds-focus-card__dot\"></span><span class=\"ds-focus-card__status-text\">Status: In Progress</span></div></div>",
+      "css": ".ds-focus-card { background: oklch(93.5% 0.010 150); border: 1px solid oklch(43% 0.099 155 / 0.15); border-radius: 2px; padding: 20px 24px; margin-bottom: 48px; } .ds-focus-card__label { font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(49% 0.008 89); margin: 0 0 10px; } .ds-focus-card__title { font-family: var(--font-spectral, Georgia, serif); font-size: 22px; font-weight: 600; line-height: 1.25; color: oklch(28.5% 0.038 243); margin: 0 0 12px; } .ds-focus-card__desc { font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 14px; line-height: 1.7; color: oklch(10.5% 0.003 89); margin: 0 0 16px; max-width: 520px; } .ds-focus-card__status { display: flex; align-items: center; gap: 8px; } .ds-focus-card__dot { display: block; width: 7px; height: 7px; border-radius: 50%; background: oklch(43% 0.099 155); flex-shrink: 0; } .ds-focus-card__status-text { font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 10px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: oklch(49% 0.008 89); }"
+    },
+    {
+      "name": "Stack Tag",
+      "kind": "chip",
+      "refersTo": null,
+      "description": "Technology name labels on project entries. Geist label style, Pencil color, dot-separated. Not monospace, not all-caps.",
+      "html": "<div class=\"ds-stack-tags\"><span class=\"ds-stack-tag\">React</span><span class=\"ds-stack-sep\">·</span><span class=\"ds-stack-tag\">FastAPI</span><span class=\"ds-stack-sep\">·</span><span class=\"ds-stack-tag\">Python</span></div>",
+      "css": ".ds-stack-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; } .ds-stack-tag { font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 11px; font-weight: 400; color: oklch(49% 0.008 89); letter-spacing: 0.02em; } .ds-stack-sep { font-family: var(--font-geist-sans, system-ui, sans-serif); font-size: 11px; color: oklch(49% 0.008 89); margin: 0 2px; user-select: none; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lab Notebook",
+    "overview": "A research notebook is both precise and personal. It has structure: numbered entries, dates, references, rigorous notation. It also has character: annotations in the margins, a sketch of something half-understood, the ink weight of an idea that mattered. This design system holds that tension. The vocabulary comes from the work — technical reports, engineering documentation, the kind of thing someone reads when they want to understand how something actually works — not from design trends or portfolio templates.\n\nEvery element earns its presence through function. Spacing does the work that borders and dividers usually fake. Typography hierarchy replaces decoration. The warm ash ground is the only concession to softness; everything built on top of it is deliberate, direct, and slightly uncomfortable with ornamentation. The accent green appears only at moments of genuine action: a link to follow, a file to download, a status worth tracking.\n\nThis system explicitly rejects the editorial-typographic lane (display serif, small-caps metadata, ruled separators, warm paper) that has flooded personal portfolios since 2024. It also rejects SaaS AI slop (glassmorphism, gradient text, hero metrics, identical card grids, neon accents) and the \"creative developer\" aesthetic (brutalist-for-shock, neon-on-black, excessive motion).",
+    "keyCharacteristics": [
+      "Flat, ink-on-paper surfaces — no shadows, no elevation, no decorative layering",
+      "Spectral at display scale reads like a typeface chosen for legibility, not performance",
+      "Geist carries all UI text: precise, slightly technical, not trying to be warm",
+      "The forest green accent is rare; its rarity is what makes it mean something",
+      "Spacing creates rhythm; no ruled separators needed",
+      "Sharp corners throughout — border-radius: 0 is the default"
+    ],
+    "rules": [
+      { "name": "The Rarity Rule",         "body": "Forest green appears on less than 10% of any screen surface. When everything is green, nothing is. If you are considering a green border, green dot, green badge, or green background that isn't the FocusCard tint or a button — reconsider.", "section": "colors" },
+      { "name": "The AA Floor",             "body": "No text, label, or metadata color may fall below 4.5:1 contrast on Warm Ash. Pencil (oklch(49% 0.008 89)) is the lightest permissible muted tone.", "section": "colors" },
+      { "name": "The Single Display Rule",  "body": "Spectral at display scale (clamp 38–64px) appears exactly once per page — the hero name. Every other Spectral instance is headline (22–26px) or title (18px).", "section": "typography" },
+      { "name": "The Mono Discipline Rule", "body": "JetBrains Mono is for code. Stack technology names are rendered in Geist label style, separated by ·, not in JetBrains Mono at 10px all-caps.", "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "Surfaces are flat at rest. The only depth signal is tonal: Fog (93.5% lightness) against Warm Ash (96.5% lightness). If you reach for box-shadow, ask whether spacing and background differentiation can do the same job.", "section": "elevation" },
+      { "name": "The No Stripe Rule",       "body": "border-left or border-right greater than 1px used as a colored accent on any card, callout, or list item is prohibited. Rewrite with a full border, a background tint, or nothing.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use OKLCH for all color values. Keep chroma below 0.01 for near-white and near-black tones.",
+      "Do use Spectral exclusively for display, headline, and title hierarchy. Geist for all body, label, and UI text.",
+      "Do use Forest green only for functional moments: links, the primary button, the FocusCard border tint, the active nav state.",
+      "Do cap body line length at 65ch.",
+      "Do use spacing variation to create page rhythm. Let whitespace separate sections before reaching for dividers.",
+      "Do ensure all muted text uses Pencil (oklch(49% 0.008 89)) or darker.",
+      "Do gate all CSS transitions with prefers-reduced-motion: reduce.",
+      "Do give all touch targets a minimum 44px height, regardless of visual font size.",
+      "Do use aria-label on all icon-only interactive elements."
+    ],
+    "donts": [
+      "Don't use side-stripe borders (border-left or border-right greater than 1px as a colored accent). Prohibited on all cards, callouts, list items, and alerts.",
+      "Don't use gradient text (background-clip: text with a gradient background). Prohibited.",
+      "Don't use glassmorphism decoratively. Prohibited.",
+      "Don't use JetBrains Mono for stack tags, technology labels, or decorative technical text. Mono is for code.",
+      "Don't use hover:scale-105 or any scale transform on text links or nav items. Use color transitions instead.",
+      "Don't use #888880 or any lighter muted tone for text. It fails WCAG AA contrast on Warm Ash.",
+      "Don't use border-bottom ruled separators between sections as decoration. Use spacing.",
+      "Don't publish a nav link that returns a 404. Remove Blog from the nav until content exists.",
+      "Don't land in the editorial-typographic lane: display serif italics, small-caps metadata, ruled grids, broadsheet composition.",
+      "Don't use pastel gradients, floating icon-above-heading cards, or hero metric layouts.",
+      "Don't nest a <main> element inside the root layout's <main>."
+    ]
+  }
+}
