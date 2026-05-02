@@ -9,12 +9,20 @@ export default function NotFound() {
       <h1 className="mb-6 font-serif text-3xl text-slate sm:text-4xl">
         Looks like nothing is here.
       </h1>
-      <Link
-        href="/"
-        className="font-sans text-xs tracking-[0.15em] uppercase text-forest transition-colors duration-150 hover:underline"
-      >
-        Go home
-      </Link>
+      <p className="mb-5 font-sans text-xs tracking-[0.12em] text-pencil uppercase">
+        Here are some places to go:
+      </p>
+      <div className="flex gap-6">
+        <Link href="/" className="font-sans text-xs tracking-[0.15em] uppercase text-forest transition-colors duration-150 hover:underline">
+          Home
+        </Link>
+        <Link href="/projects" className="font-sans text-xs tracking-[0.15em] uppercase text-forest transition-colors duration-150 hover:underline">
+          Projects
+        </Link>
+        <Link href="/about" className="font-sans text-xs tracking-[0.15em] uppercase text-forest transition-colors duration-150 hover:underline">
+          About
+        </Link>
+      </div>
     </div>
   );
 }

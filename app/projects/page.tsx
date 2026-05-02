@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties } from "react";
-import Link from "next/link";
 
 interface Project {
   date: string;
@@ -39,11 +38,16 @@ const PROJECTS: Project[] = [
   },
 ];
 
-function ArrowIcon() {
+const EXCLUDED_TAGS = new Set(["SQLite", "Tesseract OCR"]);
+const ALL_TAGS = Array.from(new Set(PROJECTS.flatMap((p) => p.stack))).filter(
+  (t) => !EXCLUDED_TAGS.has(t)
+);
+
+function ExternalLinkIcon() {
   return (
     <svg
-      width="10"
-      height="10"
+      width="9"
+      height="9"
       viewBox="0 0 12 12"
       fill="none"
       stroke="currentColor"
@@ -51,7 +55,9 @@ function ArrowIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M2 6h8M6 2l4 4-4 4" />
+      <path d="M5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V7" />
+      <path d="M8 1h3v3" />
+      <path d="M11 1L6 6" />
     </svg>
   );
 }
@@ -94,13 +100,15 @@ function ProjectCard({
 
         <div className="flex gap-4">
           {project.links.map((link) => (
-            <Link
+            <a
               key={link.label}
               href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium tracking-[0.08em] uppercase text-forest no-underline transition-colors duration-150 hover:underline"
             >
-              {link.label} <ArrowIcon />
-            </Link>
+              {link.label} <ExternalLinkIcon />
+            </a>
           ))}
         </div>
       </div>
@@ -110,6 +118,7 @@ function ProjectCard({
 
 export default function ProjectsPage() {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeTag, setActiveTag] = useState<string | null>(null);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -126,6 +135,10 @@ export default function ProjectsPage() {
     transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
   });
 
+  const visible = activeTag
+    ? PROJECTS.filter((p) => p.stack.includes(activeTag))
+    : PROJECTS;
+
   return (
     <>
       <div className="mb-1" style={fadeStyle(0)}>
@@ -137,16 +150,50 @@ export default function ProjectsPage() {
         </p>
       </div>
 
+      <div className="mt-5 mb-10 flex flex-wrap gap-2" style={fadeStyle(80)}>
+        {["All", ...ALL_TAGS].map((tag) => (
+          <button
+            key={tag}
+            onClick={() =>
+              setActiveTag(tag === "All" ? null : activeTag === tag ? null : tag)
+            }
+            aria-pressed={(tag === "All" && !activeTag) || activeTag === tag}
+            className={`font-sans text-[11px] tracking-[0.08em] uppercase px-3 py-1.5 transition-colors duration-150 ${
+              (tag === "All" && !activeTag) || activeTag === tag
+                ? "bg-forest text-warm-ash"
+                : "text-pencil hover:text-slate"
+            }`}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+
       <div>
-        {PROJECTS.map((project, i) => (
+        {visible.map((project, i) => (
           <ProjectCard
             key={project.title}
             project={project}
             spacingTop={i > 0}
-            style={fadeStyle(120 + i * 80)}
+            style={fadeStyle(160 + i * 80)}
           />
         ))}
       </div>
+
+      <section className="py-12 sm:py-16 border-t border-[rgba(13,13,13,0.08)]" style={fadeStyle(320)}>
+        <p className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-pencil">
+          Get In Touch
+        </p>
+        <p className="mb-4 font-sans text-[15px] leading-[1.7] text-ink max-w-[52ch]">
+          Looking for a SWE intern for Summer 2026, or want to collaborate on research? I&apos;d love to hear from you.
+        </p>
+        <a
+          href="mailto:chasephung13@gmail.com"
+          className="font-sans text-[13px] font-medium text-forest no-underline transition-colors duration-150 hover:underline"
+        >
+          chasephung13@gmail.com
+        </a>
+      </section>
     </>
   );
 }

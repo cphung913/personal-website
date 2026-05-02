@@ -12,6 +12,13 @@ export default function Header() {
   ];
 
   return (
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-forest focus:px-4 focus:py-2 focus:font-sans focus:text-sm focus:text-warm-ash focus:no-underline"
+      >
+        Skip to content
+      </a>
     <header className="sticky top-0 z-50 flex min-h-[52px] flex-col items-start justify-center gap-2 border-b border-[rgba(13,13,13,0.08)] bg-warm-ash px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-6 sm:py-0 lg:px-10">
       <Link
         href="/"
@@ -41,5 +48,6 @@ export default function Header() {
         })}
       </nav>
     </header>
+    </>
   );
 }

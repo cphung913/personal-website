@@ -9,8 +9,10 @@
   --color-slate:       oklch(28.5% 0.038 243);
   --color-forest:      oklch(43% 0.099 155);
   --color-forest-deep: oklch(37% 0.090 155);
-  --color-pencil:      oklch(49% 0.008 89);
+  --color-pencil:      oklch(46% 0.008 89);
   --color-fog:         oklch(93.5% 0.010 150);
+  --color-forest-subtle: oklch(93.5% 0.018 155);
+  --color-border-subtle: oklch(88% 0.004 89);
 
   --font-sans:  var(--font-geist-sans);
   --font-serif: var(--font-spectral);
@@ -34,6 +36,11 @@ pre,
 kbd,
 samp {
   font-family: var(--font-jetbrains-mono);
+}
+
+:focus-visible {
+  outline: 2px solid oklch(43% 0.099 155);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {

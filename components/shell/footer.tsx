@@ -15,11 +15,19 @@ export default function Footer() {
           <a
             key={l.label}
             href={l.href}
+            {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="font-sans text-[11px] uppercase tracking-[0.08em] text-pencil no-underline transition-colors duration-150 hover:text-forest"
           >
             {l.label}
           </a>
         ))}
+        <a
+          href="/resume.pdf"
+          download
+          className="font-sans text-[11px] uppercase tracking-[0.08em] text-pencil no-underline transition-colors duration-150 hover:text-forest"
+        >
+          Resume ↓
+        </a>
       </div>
     </footer>
   );

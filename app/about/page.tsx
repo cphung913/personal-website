@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 const COURSEWORK = [
   "ICS 6B: Boolean Logic and Discrete Structures",
@@ -69,7 +70,7 @@ export default function AboutPage() {
               className="font-sans text-[15px] leading-relaxed text-ink space-y-4 max-w-[65ch]"
             >
               <p>
-                I&apos;m studying Computer Science at UC Irvine (GPA: 3.88), working as a Learning Assistant for ICS 6B and doing undergraduate ML research through UCI&apos;s UROP program. I&apos;m AWS Certified Cloud Practitioner.
+                I&apos;m studying Computer Science at UC Irvine (GPA: 3.88), working as a Learning Assistant for ICS 6B and pursuing undergraduate ML research through UCI&apos;s UROP research discovery program. I&apos;m AWS Certified Cloud Practitioner and a Hackathon winner.
               </p>
               <p>
                 In the short term I want to ship products that solve real problems and land a SWE internship. Long term I&apos;m heading toward a career in software engineering. Right now I&apos;m trying to learn fast and find people to grow with.
@@ -82,14 +83,14 @@ export default function AboutPage() {
             style={fadeStyle(240)}
             className="flex-shrink-0"
           >
-            <div className="h-40 w-32 overflow-hidden bg-[#ddd] md:h-56 md:w-44">
-              <img
+            <div className="relative h-40 w-32 overflow-hidden bg-fog md:h-56 md:w-44">
+              <Image
                 src="/chase.jpg"
                 alt="Chase Phung"
-                className="w-full h-full object-cover grayscale"
-                onError={(e) =>
-                  ((e.target as HTMLImageElement).style.display = "none")
-                }
+                fill
+                className="object-cover grayscale"
+                sizes="(min-width: 768px) 176px, 128px"
+                priority
               />
             </div>
             <div className="mt-4">
@@ -120,7 +121,14 @@ export default function AboutPage() {
             className="w-full"
             style={{ height: "680px" }}
             title="Chase Phung Resume"
-          />
+          >
+            <p className="p-6 font-sans text-sm text-ink">
+              Your browser does not support embedded PDFs.{" "}
+              <a href="/resume.pdf" download className="text-forest underline">
+                Download the resume instead.
+              </a>
+            </p>
+          </iframe>
         </div>
 
         <div className="mt-4 flex justify-end">
@@ -190,6 +198,26 @@ export default function AboutPage() {
             I go to hackathons mostly for fun and partly for the free food.
           </p>
         </div>
+      </section>
+
+      {/* Contact */}
+      <section
+        ref={(el) => addRef(el, 11)}
+        style={fadeStyle(0)}
+        className="py-12 sm:py-16 border-t border-[rgba(13,13,13,0.08)]"
+      >
+        <p className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-pencil">
+          Get In Touch
+        </p>
+        <p className="mb-4 font-sans text-[15px] leading-[1.7] text-ink max-w-[52ch]">
+          Looking for a SWE intern for Summer 2026, or want to collaborate on research? I&apos;d love to hear from you.
+        </p>
+        <a
+          href="mailto:chasephung13@gmail.com"
+          className="font-sans text-[13px] font-medium text-forest no-underline transition-colors duration-150 hover:underline"
+        >
+          chasephung13@gmail.com
+        </a>
       </section>
     </>
   );

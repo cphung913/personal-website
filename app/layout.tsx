@@ -9,8 +9,7 @@ import Header from "../components/shell/header";
 const spectral = Spectral({
   variable: "--font-spectral",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
-  style: ["normal", "italic"],
+  weight: ["400", "600", "700"],
   display: "swap",
 });
 
@@ -38,7 +37,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-warm-ash font-sans text-ink">
         <Header />
-        <main className="mx-auto w-full max-w-180 flex-1 px-4 pt-10 sm:px-6 sm:pt-12 lg:px-10 lg:pt-16">
+        <main id="main-content" className="mx-auto w-full max-w-180 flex-1 px-4 pt-10 sm:px-6 sm:pt-12 lg:px-10 lg:pt-16">
           {children}
           <Analytics />
         </main>

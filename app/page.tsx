@@ -16,7 +16,7 @@ const FOCUS = {
   label: "Current Technical Focus",
   title: "ML Efficiency Research",
   description:
-    "Surveying ML efficiency literature with a PhD student mentor through UCI's UROP Discovery Program. Identifying open research problems and developing a project for lab outreach.",
+    "Surveying ML efficiency literature with a PhD student mentor through UCI's Undergraduate Research Opportunities Program (UROP). Identifying open research problems and developing a project for lab outreach.",
   status: "In Progress",
 };
 
@@ -31,18 +31,6 @@ const PROJECTS: Project[] = [
     links: [
       { label: "Devpost", href: "https://devpost.com/software/downstream-kytmub" },
       { label: "GitHub", href: "https://github.com/cphung913/DownStream-AWSCloudHacks"},
-    ],
-  },
-  {
-    date: "March 2026",
-    label: "IrvineHacks",
-    stack: ["React", "Next.js", "FastAPI", "Python", "SQLite", "Tesseract OCR"],
-    title: "Property Risk Intelligence",
-    description:
-      "OCR-based document analysis system that identifies inconsistencies in property underwriting workflows, targeting risk detection across tax, title, and financial documents. Rule-based classification and discrepancy detection logic extracts and validates structured financial data. Validated system design and risk criteria through direct consultation with First American employees and industry underwriters during a 36-hour hackathon.",
-    links: [
-      { label: "GitHub", href: "https://github.com/cphung913/Irvine-Hacks-2026" },
-      { label: "Devpost", href: "https://devpost.com/software/property-risk-intelligence" },
     ],
   },
 ];
@@ -81,10 +69,12 @@ function DownloadIcon() {
   );
 }
 
-function ArrowIcon() {
+function ExternalLinkIcon() {
   return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M2 6h8M6 2l4 4-4 4" />
+    <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V7" />
+      <path d="M8 1h3v3" />
+      <path d="M11 1L6 6" />
     </svg>
   );
 }
@@ -123,7 +113,7 @@ function FeaturedProjects() {
         </h2>
         <Link
           href="/projects"
-          className="py-3 -my-3 font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-pencil no-underline transition-colors duration-150 hover:text-forest"
+          className="py-3 -my-3 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-forest no-underline transition-colors duration-150 hover:underline"
         >
           View All
         </Link>
@@ -152,13 +142,15 @@ function FeaturedProjects() {
             </p>
             <div className="flex gap-4">
               {project.links.map((link) => (
-                <Link
+                <a
                   key={link.label}
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-forest no-underline transition-colors duration-150 hover:underline"
                 >
-                  {link.label} <ArrowIcon />
-                </Link>
+                  {link.label} <ExternalLinkIcon />
+                </a>
               ))}
             </div>
           </div>
@@ -201,7 +193,7 @@ export default function HomePage() {
           Freshman at UC Irvine studying Computer Science. Learning Assistant for ICS 6B and aspiring undergraduate ML researcher through UCI's UROP research discovery program. Hackathon Winner and   AWS Certified Cloud Practitioner.
         </p>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           {[
             { icon: <GitHubIcon />, href: "https://github.com/cphung913", label: "GitHub" },
             { icon: <LinkedInIcon />, href: "https://linkedin.com/in/chasephung", label: "LinkedIn" },
@@ -211,9 +203,11 @@ export default function HomePage() {
               key={s.label}
               href={s.href}
               aria-label={s.label}
-              className="flex items-center text-slate no-underline transition-colors duration-150 hover:text-forest"
+              {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="flex items-center gap-1.5 font-sans text-[11px] tracking-[0.08em] uppercase text-slate no-underline transition-colors duration-150 hover:text-forest"
             >
               {s.icon}
+              <span>{s.label}</span>
             </a>
           ))}
 
