@@ -182,7 +182,7 @@ export default function HomePage() {
     <>
       <section className="mb-12" style={fadeStyle(0)}>
         <p className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-pencil">
-          CS Freshman · UC Irvine
+          Computer Science · UC Irvine
         </p>
 
         <h1 className="mb-5 font-serif text-[clamp(38px,10vw,64px)] leading-[1.05] text-slate">
@@ -190,7 +190,7 @@ export default function HomePage() {
         </h1>
 
         <p className="mb-6 max-w-[480px] font-sans text-base leading-[1.7] text-ink">
-          Freshman at UC Irvine studying Computer Science. Learning Assistant for ICS 6B and aspiring undergraduate ML researcher through UCI's UROP research discovery program. Hackathon Winner and   AWS Certified Cloud Practitioner.
+          Student at UC Irvine studying Computer Science. Learning Assistant for ICS 6B and aspiring undergraduate ML researcher through UCI's UROP research discovery program. Hackathon Winner and   AWS Certified Cloud Practitioner.
         </p>
 
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -222,10 +222,10 @@ export default function HomePage() {
       </section>
 
       <div style={fadeStyle(80)}>
-        <FocusCard />
+        <FeaturedProjects />
       </div>
       <div style={fadeStyle(160)}>
-        <FeaturedProjects />
+        <FocusCard />
       </div>
     </>
   );
