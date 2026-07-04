@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "../components/reveal";
 import Wave from "../components/wave";
+import { GitHubIcon, LinkedInIcon, MailIcon } from "../components/icons";
 
 /* ------------------------------------------------------------------ data */
 
@@ -185,25 +186,25 @@ export default function HomePage() {
               <div className="mt-7 flex flex-wrap gap-2.5">
                 <a
                   href="mailto:chasephung13@gmail.com"
-                  className="rounded-full bg-ink px-4 py-2 text-[13px] font-semibold text-paper no-underline transition-opacity duration-150 hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-[13px] font-semibold text-paper no-underline transition-opacity duration-150 hover:opacity-90"
                 >
-                  Email →
+                  <MailIcon /> Email →
                 </a>
                 <a
                   href="https://github.com/cphung913"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-ink/25 px-4 py-2 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
+                  className="inline-flex items-center gap-2 rounded-full border border-ink/25 px-4 py-2 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
                 >
-                  GitHub
+                  <GitHubIcon /> GitHub
                 </a>
                 <a
                   href="https://linkedin.com/in/chasephung"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-ink/25 px-4 py-2 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
+                  className="inline-flex items-center gap-2 rounded-full border border-ink/25 px-4 py-2 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
                 >
-                  LinkedIn
+                  <LinkedInIcon /> LinkedIn
                 </a>
               </div>
             </div>

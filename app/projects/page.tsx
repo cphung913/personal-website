@@ -13,6 +13,15 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
+    date: "Apr – May 2026",
+    label: "Startup",
+    title: "Pelennor",
+    description:
+      "An offline-first incident management platform for volunteer fire departments, with a sync engine and conflict resolution, multi-tenant auth, and a transcription pipeline that structures NERIS-ready incident reports. The companion mobile app uses ElevenLabs and Gemini to transcribe firefighter voice memos into shift-handoff records, with multipart audio upload, offline persistence, and email-based delivery.",
+    stack: ["Python", "TypeScript", "FastAPI", "React", "Next.js", "React Native", "PostgreSQL"],
+    links: [],
+  },
+  {
     date: "April 2026",
     label: "UCI AWS Cloud Hacks",
     title: "DownStream",
@@ -30,7 +39,7 @@ const PROJECTS: Project[] = [
     title: "Property Risk Intelligence",
     description:
       "OCR-based document analysis system that identifies inconsistencies in property underwriting workflows, targeting risk detection across tax, title, and financial documents. Rule-based classification and discrepancy detection logic extracts and validates structured financial data. Validated system design and risk criteria through direct consultation with First American employees and industry underwriters during a 36-hour hackathon.",
-    stack: ["React", "Next.js", "FastAPI", "Python", "SQLite", "Tesseract OCR"],
+    stack: ["React", "Next.js", "FastAPI", "Python", "SQLite"],
     links: [
       { label: "GitHub", href: "https://github.com/cphung913/Irvine-Hacks-2026" },
       { label: "Devpost", href: "https://devpost.com/software/property-risk-intelligence" },
@@ -99,6 +108,7 @@ export default function ProjectsPage() {
                   </span>
                 ))}
               </div>
+              {project.links.length > 0 && (
               <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
                 {project.links.map((link) => (
                   <a
@@ -112,6 +122,7 @@ export default function ProjectsPage() {
                   </a>
                 ))}
               </div>
+              )}
             </div>
           </article>
         </Reveal>

@@ -1,9 +1,10 @@
 import Wave from "../wave";
+import { GitHubIcon, LinkedInIcon, MailIcon, ResumeIcon } from "../icons";
 
 const LINKS = [
-  { label: "GitHub", href: "https://github.com/cphung913" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/chasephung" },
-  { label: "Résumé PDF", href: "/Tech_Resume.pdf" },
+  { label: "GitHub", href: "https://github.com/cphung913", icon: GitHubIcon },
+  { label: "LinkedIn", href: "https://linkedin.com/in/chasephung", icon: LinkedInIcon },
+  { label: "Résumé PDF", href: "/Tech_Resume.pdf", icon: ResumeIcon },
 ];
 
 export default function Footer() {
@@ -19,9 +20,9 @@ export default function Footer() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
               href="mailto:chasephung13@gmail.com"
-              className="rounded-full bg-ink px-5 py-2.5 text-[13px] font-semibold text-paper no-underline transition-opacity duration-150 hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-semibold text-paper no-underline transition-opacity duration-150 hover:opacity-90"
             >
-              Email →
+              <MailIcon /> Email →
             </a>
             {LINKS.map((l) => (
               <a
@@ -29,9 +30,9 @@ export default function Footer() {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-ink/25 px-5 py-2.5 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
+                className="inline-flex items-center gap-2 rounded-full border border-ink/25 px-5 py-2.5 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
               >
-                {l.label}
+                <l.icon /> {l.label}
               </a>
             ))}
           </div>
