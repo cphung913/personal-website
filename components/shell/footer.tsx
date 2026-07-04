@@ -1,33 +1,41 @@
-"use client";
+import Wave from "../wave";
+
+const LINKS = [
+  { label: "GitHub", href: "https://github.com/cphung913" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/chasephung" },
+  { label: "Résumé PDF", href: "/Tech_Resume.pdf" },
+];
+
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-start gap-4 border-t border-[rgba(13,13,13,0.08)] px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-12">
-      <p className="font-sans text-[11px] uppercase tracking-[0.08em] text-pencil">
-        © 2026 Chase Phung
-      </p>
+    <footer>
+      <Wave from="var(--color-paper)" to="var(--color-sage-band)" variant={2} />
+      <div className="bg-sage-band">
+        <div className="mx-auto w-full max-w-[1080px] px-6 pb-16 pt-8 text-center sm:px-12 sm:pb-20">
+          <p className="font-serif text-[clamp(1.5rem,6vw,3rem)] font-medium italic leading-none text-ink">
+            Looking for a SWE intern? — get in touch!
+          </p>
 
-      <div className="flex flex-wrap gap-x-4 gap-y-2 sm:gap-6">
-        {[
-          { label: "GitHub", href: "https://github.com/cphung913" },
-          { label: "LinkedIn", href: "https://linkedin.com/in/chasephung" },
-          { label: "Email", href: "mailto:chasephung13@gmail.com" },
-        ].map((l) => (
-          <a
-            key={l.label}
-            href={l.href}
-            {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className="font-sans text-[11px] uppercase tracking-[0.08em] text-pencil no-underline transition-colors duration-150 hover:text-forest"
-          >
-            {l.label}
-          </a>
-        ))}
-        <a
-          href="/resume.pdf"
-          download
-          className="font-sans text-[11px] uppercase tracking-[0.08em] text-pencil no-underline transition-colors duration-150 hover:text-forest"
-        >
-          Resume ↓
-        </a>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="mailto:chasephung13@gmail.com"
+              className="rounded-full bg-ink px-5 py-2.5 text-[13px] font-semibold text-paper no-underline transition-opacity duration-150 hover:opacity-90"
+            >
+              Email →
+            </a>
+            {LINKS.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-ink/25 px-5 py-2.5 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </footer>
   );

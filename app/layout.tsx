@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Spectral, JetBrains_Mono } from "next/font/google";
-import { GeistSans } from "geist/font/sans";
+import { Newsreader, Manrope, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Footer from "../components/shell/footer";
 import Header from "../components/shell/header";
 
-const spectral = Spectral({
-  variable: "--font-spectral",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  display: "swap",
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: "variable",
   display: "swap",
 });
 
@@ -20,9 +28,9 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "chasephung.dev",
+  title: "Chase Phung",
   description:
-    "Personal website of Chase Phung, a UCI computer science student and aspiring software engineer.",
+    "Chase Phung builds software that ships: computer science at UC Irvine, software engineer intern at Ease, Inc., founder of Pelennor, and hackathon winner.",
 };
 
 export default function RootLayout({
@@ -33,11 +41,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spectral.variable} ${GeistSans.variable} ${jetBrainsMono.variable} h-full antialiased`}
+      className={`${newsreader.variable} ${manrope.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-warm-ash font-sans text-ink">
+      <body className="flex min-h-full flex-col bg-paper font-sans text-ink">
         <Header />
-        <main id="main-content" className="mx-auto w-full max-w-180 flex-1 px-4 pt-10 sm:px-6 sm:pt-12 lg:px-10 lg:pt-16">
+        <main id="main-content" className="flex-1">
           {children}
           <Analytics />
         </main>

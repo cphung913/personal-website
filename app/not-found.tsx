@@ -2,25 +2,25 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center sm:px-6">
-      <p className="font-sans text-xs tracking-[0.18em] text-pencil uppercase mb-4">
+    <div className="mx-auto flex min-h-[60vh] w-full max-w-[1080px] flex-col justify-center px-6 sm:px-12">
+      <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-sage-deep">
         404
       </p>
-      <h1 className="mb-6 font-serif text-3xl text-slate sm:text-4xl">
-        Looks like nothing is here.
+      <h1 className="mt-4 font-serif text-[clamp(2.25rem,6vw,3.5rem)] font-medium leading-[1.05]">
+        Nothing here.
       </h1>
-      <p className="mb-5 font-sans text-xs tracking-[0.12em] text-pencil uppercase">
-        Here are some places to go:
-      </p>
-      <div className="flex gap-6">
-        <Link href="/" className="font-sans text-xs tracking-[0.15em] uppercase text-forest transition-colors duration-150 hover:underline">
-          Home
+      <div className="mt-8 flex gap-6">
+        <Link
+          href="/"
+          className="py-2 text-sm font-semibold text-sage-deep no-underline transition-colors duration-150 hover:text-sage"
+        >
+          Home →
         </Link>
-        <Link href="/projects" className="font-sans text-xs tracking-[0.15em] uppercase text-forest transition-colors duration-150 hover:underline">
-          Projects
-        </Link>
-        <Link href="/about" className="font-sans text-xs tracking-[0.15em] uppercase text-forest transition-colors duration-150 hover:underline">
-          About
+        <Link
+          href="/projects"
+          className="py-2 text-sm font-semibold text-sage-deep no-underline transition-colors duration-150 hover:text-sage"
+        >
+          Projects →
         </Link>
       </div>
     </div>

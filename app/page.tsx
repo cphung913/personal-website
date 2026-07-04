@@ -1,232 +1,368 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { type ReactNode, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import Reveal from "../components/reveal";
+import Wave from "../components/wave";
 
-interface Project {
-  date: string;
-  label: string;
-  stack: string[];
-  title: string;
-  description: string;
-  links: { label: string; href: string }[];
-}
+/* ------------------------------------------------------------------ data */
 
-const FOCUS = {
-  label: "Current Technical Focus",
-  title: "ML Efficiency Research",
-  description:
-    "Surveying ML efficiency literature with a PhD student mentor through UCI's Undergraduate Research Opportunities Program (UROP). Identifying open research problems and developing a project for lab outreach.",
-  status: "In Progress",
+const HERO = {
+  lead: "Hi, I'm Chase,",
+  accent: "Software Engineer",
+  blurb:
+    "Pursuing a career in software engineering and studying computer science at UC Irvine. I have experience across full-stack web and mobile development, databases and cloud, and building AI pipelines. I am passionate about designing systems, tackling hard problems, and shipping projects that solve real-world needs.",
 };
 
-const PROJECTS: Project[] = [
+const EDUCATION = {
+  school: "University of California, Irvine",
+  detail: "B.S. Computer Science · 3.84 GPA · Class of 2029",
+};
+
+const EXTRACURRICULARS = [
   {
-    date: "April 2026",
-    label: "UCI AWS Cloud Hacks",
-    stack: ["React", "TypeScript", "AWS"],
-    title: "DownStream",
-    description:
-      "Won Best AI for Environmental Impact at UCI AWS Cloud Hacks 2026. A real-time chemical spill propagation simulator for emergency managers, using the Mississippi River as a geospatial case study. Features budget-constrained mitigation options with spill-type-aware effectiveness logic anchored to FEMA HMGP cost benchmarks from 597 federal projects. Deployed via AWS Amplify with Amazon Location Service for map infrastructure.",
-    links: [
-      { label: "Devpost", href: "https://devpost.com/software/downstream-kytmub" },
-      { label: "GitHub", href: "https://github.com/cphung913/DownStream-AWSCloudHacks"},
-    ],
+    lead: "Director of External Affairs",
+    rest: ", Sigma Eta Pi: UCI's entrepreneurship fraternity",
+    when: "Jun 2026 – Present",
+  },
+  {
+    lead: "Learning Assistant",
+    rest: ", ICS 6B: Boolean Logic & Discrete Structures",
+    when: "Mar 2026 – Jun 2026",
+  },
+  {
+    lead: "Jazz Orchestra",
+    rest: ", UC Irvine",
+    when: "Sep 2025 - Jun 2026",
   },
 ];
 
-function GitHubIcon() {
+const EXPERIENCE = {
+  company: "Ease, Inc.",
+  meta: ["Ease IQ team · Irvine, CA", "Jun 2026 – Present"],
+  role: "Software Engineer Intern",
+  bullets: [
+    "Re-architected a 3-camera label-verification pipeline into a detection-triggered OCR system, cutting compute time by roughly 80%.",
+    "Shipped a fully audited, multi-tenant user-impersonation system with defense-in-depth authorization.",
+    "Fine-tuned a YOLO11 model to catch PPE non-conformance: 19% fewer false positives, +13% mAP50-95.",
+  ],
+  tags: ["Python", "React", "Next.js", "PostgreSQL", "Drizzle"],
+};
+
+const STARTUP = {
+  name: "Pelennor",
+  description:
+    "An offline-first incident management platform for volunteer fire departments: a sync engine with conflict resolution, multi-tenant auth, and a voice-to-report pipeline that turns firefighter memos into NERIS-ready records.",
+  tags: ["FastAPI", "React Native", "ElevenLabs", "Gemini"]
+};
+
+const HACKATHONS = [
+  {
+    badge: "Won Best AI for Environmental Impact",
+    highlight: true,
+    name: "DownStream",
+    description:
+      "Real-time chemical-spill propagation simulator for the Mississippi River, delivering cost and mitigation insights for emergency managers. Built at UCI AWS Cloud Hacks 2026.",
+  },
+  {
+    badge: null,
+    highlight: false,
+    name: "Property Risk Intelligence",
+    description:
+      "OCR-based document analysis that spots inconsistencies across tax, title, and financial documents in property underwriting. Built at IrvineHacks 2026.",
+  },
+];
+
+/* -------------------------------------------------------------- primitives */
+
+const INNER = "mx-auto w-full max-w-[1080px] px-6 sm:px-12";
+
+function BigHeading({ children }: { children: ReactNode }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
-      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-    </svg>
+    <h2 className="font-serif text-[clamp(2.25rem,5vw,3.25rem)] font-medium leading-none">
+      {children}
+    </h2>
   );
 }
 
-function LinkedInIcon() {
+function Tags({ items, ink = false }: { items: string[]; ink?: boolean }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
-      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
-    </svg>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
-      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z" />
-    </svg>
-  );
-}
-
-function DownloadIcon() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
-    </svg>
-  );
-}
-
-function ExternalLinkIcon() {
-  return (
-    <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V7" />
-      <path d="M8 1h3v3" />
-      <path d="M11 1L6 6" />
-    </svg>
-  );
-}
-
-function FocusCard() {
-  return (
-    <div className="mb-12 rounded-[2px] border border-[oklch(43%_0.099_155_/_0.15)] bg-fog px-6 py-5">
-      <p className="mb-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.12em] text-pencil">
-        {FOCUS.label}
-      </p>
-
-      <h2 className="mb-3 font-serif text-[22px] leading-[1.25] text-slate">
-        {FOCUS.title}
-      </h2>
-
-      <p className="mb-4 max-w-[520px] font-sans text-sm leading-[1.7] text-ink">
-        {FOCUS.description}
-      </p>
-
-      <div className="flex items-center gap-2">
-        <span className="inline-block h-[7px] w-[7px] shrink-0 rounded-full bg-forest" />
-        <span className="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-pencil">
-          Status: {FOCUS.status}
+    <div className="mt-4 flex flex-wrap gap-2">
+      {items.map((t) => (
+        <span
+          key={t}
+          className={`rounded-full px-3 py-1.5 font-mono text-[11px] ${
+            ink
+              ? "bg-sage-light/20 text-sage-light"
+              : "bg-sage/15 text-sage-deep"
+          }`}
+        >
+          {t}
         </span>
-      </div>
+      ))}
     </div>
   );
 }
 
-function FeaturedProjects() {
+function PhotoFrame({
+  src,
+  caption,
+  className = "",
+  tone = "paper",
+  fit = "contain",
+}: {
+  src: string;
+  caption: string;
+  className?: string;
+  tone?: "paper" | "ink";
+  fit?: "contain" | "cover";
+}) {
+  const isInk = tone === "ink";
+  // Until the real photo lands in /public, fall back to a captioned hatch frame
+  // instead of a broken-image icon.
+  const [broken, setBroken] = useState(false);
   return (
-    <section className="mb-20">
-      <div className="mb-7 flex items-baseline justify-between">
-        <h2 className="font-serif text-[22px] text-slate sm:text-[26px]">
-          Featured Projects
-        </h2>
-        <Link
-          href="/projects"
-          className="py-3 -my-3 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-forest no-underline transition-colors duration-150 hover:underline"
-        >
-          View All
-        </Link>
-      </div>
-
-      {PROJECTS.map((project) => (
-        <div key={project.title} className="grid grid-cols-1 gap-y-3 pb-7 sm:grid-cols-[180px_1fr] sm:gap-x-6 sm:gap-y-0">
-          <div className="pt-1">
-            <p className="mb-1 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-pencil">
-              {project.date}
-            </p>
-            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-pencil">
-              {project.label}
-            </p>
-          </div>
-
-          <div>
-            <h3 className="mb-2 font-serif text-[18px] text-slate">
-              {project.title}
-            </h3>
-            <p className="mb-3 font-sans text-sm leading-[1.7] text-ink">
-              {project.description}
-            </p>
-            <p className="mb-5 font-sans text-[11px] text-pencil">
-              {project.stack.join(" · ")}
-            </p>
-            <div className="flex gap-4">
-              {project.links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-forest no-underline transition-colors duration-150 hover:underline"
-                >
-                  {link.label} <ExternalLinkIcon />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
-    </section>
+    <div
+      className={`relative flex items-end overflow-hidden rounded-[26px] ${
+        isInk ? "border border-paper/15" : "border border-ink/10"
+      } ${className}`}
+      role="img"
+      aria-label={caption}
+      style={{
+        backgroundImage: `repeating-linear-gradient(45deg, ${
+          isInk ? "rgba(245,244,239,.06)" : "rgba(28,43,69,.05)"
+        } 0 10px, transparent 10px 20px)`,
+      }}
+    >
+      {!broken && (
+        <Image
+          src={src}
+          alt={caption}
+          fill
+          sizes="(min-width: 1024px) 520px, 100vw"
+          className={fit === "cover" ? "object-cover" : "object-contain"}
+          onError={() => setBroken(true)}
+        />
+      )}
+      {!broken && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3"
+          style={{
+            background: "linear-gradient(to top, rgba(20,26,40,.6), transparent)",
+          }}
+        />
+      )}
+      <span
+        className={`relative z-10 p-5 font-mono text-[11px] leading-snug ${
+          broken ? (isInk ? "text-paper/60" : "text-ink/55") : "text-paper/90"
+        }`}
+      >
+        {caption}
+      </span>
+    </div>
   );
 }
 
+/* -------------------------------------------------------------------- page */
+
 export default function HomePage() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsVisible(true);
-      return;
-    }
-    const id = requestAnimationFrame(() => setIsVisible(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  const fadeStyle = (delay: number) => ({
-    opacity: isVisible ? 1 : 0,
-    transform: isVisible ? "translateY(0)" : "translateY(20px)",
-    transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
-  });
-
   return (
     <>
-      <section className="mb-12" style={fadeStyle(0)}>
-        <p className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-pencil">
-          Computer Science · UC Irvine
-        </p>
+      {/* Hero + Education (paper) */}
+      <div className={INNER}>
+        <Reveal>
+          <section className="grid grid-cols-1 items-center gap-12 pt-14 sm:pt-20 lg:grid-cols-[1.15fr_.85fr] lg:gap-16">
+            <div>
+              <h1 className="font-serif text-[clamp(2.75rem,6vw,4rem)] font-medium leading-[1.05]">
+                {HERO.lead}{" "}
+                <span className="italic text-sage">{HERO.accent}</span>
+              </h1>
+              <p className="mt-6 max-w-[52ch] text-[17px] leading-[1.65] text-ink/75">
+                {HERO.blurb}
+              </p>
+              <div className="mt-7 flex flex-wrap gap-2.5">
+                <a
+                  href="mailto:chasephung13@gmail.com"
+                  className="rounded-full bg-ink px-4 py-2 text-[13px] font-semibold text-paper no-underline transition-opacity duration-150 hover:opacity-90"
+                >
+                  Email →
+                </a>
+                <a
+                  href="https://github.com/cphung913"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-ink/25 px-4 py-2 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://linkedin.com/in/chasephung"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-ink/25 px-4 py-2 text-[13px] font-semibold text-ink no-underline transition-colors duration-150 hover:border-ink/50"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
 
-        <h1 className="mb-5 font-serif text-[clamp(38px,10vw,64px)] leading-[1.05] text-slate">
-          Chase Phung
-        </h1>
+            <div className="justify-self-center">
+              <div
+                className="relative aspect-[4/5] w-[280px] overflow-hidden sm:w-[340px]"
+                style={{
+                  borderRadius: "58% 42% 55% 45% / 48% 55% 45% 52%",
+                }}
+              >
+                <Image
+                  src="/chase.jpg"
+                  alt="Chase Phung"
+                  fill
+                  className="object-cover"
+                  style={{ transform: "scale(1.6)", transformOrigin: "50% 45%" }}
+                  sizes="(min-width: 640px) 340px, 280px"
+                  priority
+                />
+              </div>
+            </div>
+          </section>
+        </Reveal>
 
-        <p className="mb-6 max-w-[480px] font-sans text-base leading-[1.7] text-ink">
-          Student at UC Irvine studying Computer Science. Learning Assistant for ICS 6B and aspiring undergraduate ML researcher through UCI's UROP research discovery program. Hackathon Winner and   AWS Certified Cloud Practitioner.
-        </p>
+        <Reveal delay={80}>
+          <div className="pb-14 pt-16 sm:pt-20">
+            <BigHeading>Education</BigHeading>
+            <div className="mt-6 flex flex-col gap-3 rounded-[26px] bg-ink px-8 py-6 text-paper sm:flex-row sm:items-baseline sm:justify-between">
+              <span className="font-serif text-[22px] font-medium">
+                {EDUCATION.school}
+              </span>
+              <span className="text-sm text-paper/80">{EDUCATION.detail}</span>
+            </div>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          {[
-            { icon: <GitHubIcon />, href: "https://github.com/cphung913", label: "GitHub" },
-            { icon: <LinkedInIcon />, href: "https://linkedin.com/in/chasephung", label: "LinkedIn" },
-            { icon: <MailIcon />, href: "mailto:chasephung13@gmail.com", label: "Email" },
-          ].map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              aria-label={s.label}
-              {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="flex items-center gap-1.5 font-sans text-[11px] tracking-[0.08em] uppercase text-slate no-underline transition-colors duration-150 hover:text-forest"
-            >
-              {s.icon}
-              <span>{s.label}</span>
-            </a>
-          ))}
+            <p className="mt-8 font-mono text-[13px] uppercase tracking-[0.1em] text-sage-deep">
+              Extracurriculars
+            </p>
+            <ul className="mt-4 flex flex-col gap-3">
+              {EXTRACURRICULARS.map((x) => (
+                <li
+                  key={x.lead}
+                  className="relative pl-6 text-[14.5px] leading-[1.6] text-ink/85 before:absolute before:left-0 before:top-[9px] before:h-2 before:w-2 before:rounded-full before:bg-sage before:content-['']"
+                >
+                  <strong className="font-semibold">{x.lead}</strong>
+                  {x.rest}
+                  {x.when && <span className="text-ink/50"> · {x.when}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
+      </div>
 
-          <a
-            href="/resume.pdf"
-            download
-            className="inline-flex items-center gap-2 bg-forest text-warm-ash font-sans text-[11px] font-medium tracking-[0.15em] uppercase px-4 py-2 transition-colors duration-150 hover:bg-forest-deep"
-          >
-            <DownloadIcon /> Resume
-          </a>
-        </div>
+      {/* Experience (sage band) */}
+      <Wave from="var(--color-paper)" to="var(--color-sage-band)" variant={0} />
+      <section id="experience" className="scroll-mt-24 bg-sage-band py-14 sm:py-16">
+        <Reveal className={INNER}>
+          <BigHeading>Experience</BigHeading>
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-[210px_1fr] sm:gap-10">
+            <div className="text-[13px] leading-[1.7] text-ink/60">
+              <strong className="font-serif text-base text-ink">
+                {EXPERIENCE.company}
+              </strong>
+              {EXPERIENCE.meta.map((m) => (
+                <div key={m}>{m}</div>
+              ))}
+            </div>
+            <div>
+              <p className="text-xl font-bold">{EXPERIENCE.role}</p>
+              <ul className="mt-4 flex flex-col gap-3">
+                {EXPERIENCE.bullets.map((b) => (
+                  <li
+                    key={b}
+                    className="relative pl-[22px] text-[14.5px] leading-[1.65] text-ink/85 before:absolute before:left-0 before:top-[9px] before:h-2 before:w-2 before:rounded-full before:bg-sage before:content-['']"
+                  >
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <Tags items={EXPERIENCE.tags} />
+            </div>
+          </div>
+        </Reveal>
       </section>
 
-      <div style={fadeStyle(80)}>
-        <FeaturedProjects />
-      </div>
-      <div style={fadeStyle(160)}>
-        <FocusCard />
-      </div>
+      {/* Startups (ink band) */}
+      <Wave from="var(--color-sage-band)" to="var(--color-ink)" variant={1} />
+      <section id="startups" className="scroll-mt-24 bg-ink py-14 text-paper sm:py-16">
+        <Reveal className={INNER}>
+          <BigHeading>Startups</BigHeading>
+          <div className="mt-8 grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_480px]">
+            <div>
+              <p className="font-serif text-[28px] font-semibold">
+                {STARTUP.name}
+              </p>
+              <p className="mt-3 max-w-[54ch] text-[14.5px] leading-[1.65] text-paper/75">
+                {STARTUP.description}
+              </p>
+              <Tags items={STARTUP.tags} ink />
+            </div>
+            <PhotoFrame
+              src="/pelennor.jpg"
+              tone="ink"
+              className="aspect-[3/2] w-full"
+              caption="Chase presenting Pelennor"
+            />
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Hackathons (paper band) */}
+      <Wave from="var(--color-ink)" to="var(--color-paper)" variant={2} />
+      <section id="hackathons" className="scroll-mt-24 bg-paper py-14 sm:py-16">
+        <Reveal className={INNER}>
+          <div className="flex flex-wrap items-baseline justify-between gap-4">
+            <BigHeading>Hackathons</BigHeading>
+            <Link
+              href="/projects"
+              className="font-mono text-[13px] font-medium text-sage-deep no-underline transition-colors duration-150 hover:text-sage"
+            >
+              See all projects →
+            </Link>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {HACKATHONS.map((h) => (
+              <div
+                key={h.name}
+                className="rounded-[26px] border border-ink/10 bg-white/60 p-8 shadow-[0_2px_10px_rgba(28,43,69,.05)]"
+              >
+                <p className={`font-serif text-[26px] font-semibold ${h.badge ? "mb-2" : ""}`}>
+                  {h.name}
+                </p>
+                {h.badge && (
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.04em] mb-1 ${
+                      h.highlight
+                        ? "bg-sage text-paper"
+                        : "bg-ink/10 text-ink"
+                    }`}
+                  >
+                    {h.highlight && <span aria-hidden>★</span>}
+                    {h.badge}
+                  </span>
+                )}
+                <p className="mt-2 text-[14px] leading-[1.65] text-ink/75">
+                  {h.description}
+                </p>
+              </div>
+            ))}
+          </div>
+          <PhotoFrame
+            src="/downstream.jpg"
+            fit="cover"
+            className="mt-6 aspect-[3292/1600] w-full"
+            caption="DownStream team: Best AI for Environmental Impact, UCI AWS Cloud Hacks 2026"
+          />
+        </Reveal>
+      </section>
     </>
   );
 }

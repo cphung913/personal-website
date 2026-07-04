@@ -1,34 +1,29 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background:  oklch(96.5% 0.006 89);
-  --color-foreground:  oklch(10.5% 0.003 89);
+  --color-background: #f5f4ef;
+  --color-foreground: #1c2b45;
 
-  --color-warm-ash:    oklch(96.5% 0.006 89);
-  --color-ink:         oklch(10.5% 0.003 89);
-  --color-slate:       oklch(28.5% 0.038 243);
-  --color-forest:      oklch(43% 0.099 155);
-  --color-forest-deep: oklch(37% 0.090 155);
-  --color-pencil:      oklch(46% 0.008 89);
-  --color-fog:         oklch(93.5% 0.010 150);
-  --color-forest-subtle: oklch(93.5% 0.018 155);
-  --color-border-subtle: oklch(88% 0.004 89);
+  --color-paper:      #f5f4ef;
+  --color-ink:        #1c2b45;
+  --color-sage:       #6f855f;
+  --color-sage-deep:  #4c5f3f;
+  --color-sage-light: #a8bf9a;
+  --color-sage-band:  #e7ebdd;
 
-  --font-sans:  var(--font-geist-sans);
-  --font-serif: var(--font-spectral);
+  --font-serif: var(--font-newsreader);
+  --font-sans:  var(--font-manrope);
   --font-mono:  var(--font-jetbrains-mono);
 }
 
 body {
   margin: 0;
   min-height: 100%;
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-manrope);
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-spectral);
+.font-serif {
+  font-optical-sizing: auto;
 }
 
 code,
@@ -38,9 +33,15 @@ samp {
   font-family: var(--font-jetbrains-mono);
 }
 
+::selection {
+  background: #1c2b45;
+  color: #f5f4ef;
+}
+
+/* currentColor keeps the ring visible on paper, sage, and ink surfaces */
 :focus-visible {
-  outline: 2px solid oklch(43% 0.099 155);
-  outline-offset: 2px;
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
